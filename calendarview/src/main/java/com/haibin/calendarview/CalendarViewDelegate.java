@@ -413,7 +413,7 @@ public class CalendarViewDelegate {
     /**
      * 选择范围日历
      */
-    Calendar mSelectedStartRangeCalendar, mSelectedEndRangeCalendar;
+    public Calendar mSelectedStartRangeCalendar, mSelectedEndRangeCalendar;
 
     private int mMinSelectRange, mMaxSelectRange;
 
@@ -1054,7 +1054,7 @@ public class CalendarViewDelegate {
         }
     }
 
-    Calendar createCurrentDate() {
+    public Calendar createCurrentDate() {
         Calendar calendar = new Calendar();
         calendar.setYear(mCurrentDate.getYear());
         calendar.setWeek(mCurrentDate.getWeek());

@@ -47,7 +47,7 @@ public class CalendarView extends FrameLayout {
     /**
      * 抽取自定义属性
      */
-    private final CalendarViewDelegate mDelegate;
+    protected final CalendarViewDelegate mDelegate;
 
     /**
      * 自定义自适应高度的ViewPager
@@ -87,7 +87,7 @@ public class CalendarView extends FrameLayout {
     public CalendarView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mDelegate = new CalendarViewDelegate(context, attrs);
-        init(context);
+        init(context, attrs);
     }
 
     /**
@@ -95,7 +95,7 @@ public class CalendarView extends FrameLayout {
      *
      * @param context context
      */
-    private void init(Context context) {
+    protected void init(Context context, @Nullable AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.cv_layout_calendar_view, this, true);
         FrameLayout frameContent = findViewById(R.id.frameContent);
         this.mWeekPager = findViewById(R.id.vp_week);
