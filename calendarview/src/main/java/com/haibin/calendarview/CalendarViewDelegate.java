@@ -231,7 +231,7 @@ public class CalendarViewDelegate {
     /**
      * 月视图类
      */
-    private Class<?> mMonthViewClass;
+    protected Class<?> mMonthViewClass;
 
     /**
      * 自定义周视图路径
@@ -241,7 +241,7 @@ public class CalendarViewDelegate {
     /**
      * 周视图类
      */
-    private Class<?> mWeekViewClass;
+    protected Class<?> mWeekViewClass;
 
     /**
      * 自定义年视图路径
@@ -251,7 +251,7 @@ public class CalendarViewDelegate {
     /**
      * 周视图类
      */
-    private Class<?> mYearViewClass;
+    protected Class<?> mYearViewClass;
 
     /**
      * 自定义周栏路径
@@ -261,7 +261,7 @@ public class CalendarViewDelegate {
     /**
      * 自定义周栏
      */
-    private Class<?> mWeekBarClass;
+    protected Class<?> mWeekBarClass;
 
     /**
      * 年月视图是否打开
