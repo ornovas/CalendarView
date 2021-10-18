@@ -455,7 +455,7 @@ public final class CalendarUtil {
      * @param delegate delegate
      * @return 是否在日期范围内
      */
-    static boolean isCalendarInRange(Calendar calendar, CalendarViewDelegate delegate) {
+    public static boolean isCalendarInRange(Calendar calendar, CalendarViewDelegate delegate) {
         return isCalendarInRange(calendar,
                 delegate.getMinYear(), delegate.getMinYearMonth(), delegate.getMinYearDay(),
                 delegate.getMaxYear(), delegate.getMaxYearMonth(), delegate.getMaxYearDay());
