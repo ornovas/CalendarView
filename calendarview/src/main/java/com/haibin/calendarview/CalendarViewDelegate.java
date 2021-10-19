@@ -130,7 +130,7 @@ public class CalendarViewDelegate {
     /**
      * 各种字体颜色，看名字知道对应的地方
      */
-    private int mCurDayTextColor,
+    protected int mCurDayTextColor,
             mCurDayLunarTextColor,
             mWeekTextColor,
             mSchemeTextColor,
@@ -543,7 +543,7 @@ public class CalendarViewDelegate {
         init();
     }
 
-    private void init() {
+    protected void init() {
         mCurrentDate = new Calendar();
         Date d = new Date();
         mCurrentDate.setYear(CalendarUtil.getDate("yyyy", d));
