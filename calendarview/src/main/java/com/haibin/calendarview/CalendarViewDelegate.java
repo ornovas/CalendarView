@@ -179,7 +179,7 @@ public class CalendarViewDelegate {
     /**
      * 年视图字体大小
      */
-    private int mYearViewMonthTextSize,
+    protected int mYearViewMonthTextSize,
             mYearViewDayTextSize,
             mYearViewWeekTextSize;
 
