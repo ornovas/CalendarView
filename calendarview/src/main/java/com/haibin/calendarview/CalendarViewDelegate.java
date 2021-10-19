@@ -226,7 +226,7 @@ public class CalendarViewDelegate {
     /**
      * 自定义的日历路径
      */
-    private String mMonthViewClassPath;
+    protected String mMonthViewClassPath;
 
     /**
      * 月视图类
@@ -236,7 +236,7 @@ public class CalendarViewDelegate {
     /**
      * 自定义周视图路径
      */
-    private String mWeekViewClassPath;
+    protected String mWeekViewClassPath;
 
     /**
      * 周视图类
@@ -246,7 +246,7 @@ public class CalendarViewDelegate {
     /**
      * 自定义年视图路径
      */
-    private String mYearViewClassPath;
+    protected String mYearViewClassPath;
 
     /**
      * 周视图类
@@ -256,7 +256,7 @@ public class CalendarViewDelegate {
     /**
      * 自定义周栏路径
      */
-    private String mWeekBarClassPath;
+    protected String mWeekBarClassPath;
 
     /**
      * 自定义周栏
