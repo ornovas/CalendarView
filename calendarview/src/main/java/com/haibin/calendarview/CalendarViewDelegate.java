@@ -193,7 +193,7 @@ public class CalendarViewDelegate {
     /**
      * 年视图字体和标记颜色
      */
-    private int mYearViewMonthTextColor,
+    protected int mYearViewMonthTextColor,
             mYearViewDayTextColor,
             mYearViewSchemeTextColor,
             mYearViewSelectTextColor,
@@ -203,7 +203,7 @@ public class CalendarViewDelegate {
     /**
      * 星期栏的背景、线的背景、年份背景
      */
-    private int mWeekLineBackground,
+    protected int mWeekLineBackground,
             mYearViewBackground,
             mWeekBackground;
 
@@ -220,7 +220,7 @@ public class CalendarViewDelegate {
     /**
      * 标记的主题色和选中的主题色
      */
-    private int mSchemeThemeColor, mSelectedThemeColor;
+    protected int mSchemeThemeColor, mSelectedThemeColor;
 
 
     /**
