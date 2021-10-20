@@ -26,7 +26,8 @@ import android.widget.TextView;
  * Created by huanghaibin on 2017/11/30.
  */
 public class WeekBar extends LinearLayout {
-    private CalendarViewDelegate mDelegate;
+
+    protected CalendarViewDelegate mDelegate;
 
     public WeekBar(Context context) {
         super(context);
@@ -40,7 +41,7 @@ public class WeekBar extends LinearLayout {
      *
      * @param delegate delegate
      */
-    void setup(CalendarViewDelegate delegate) {
+    protected void setup(CalendarViewDelegate delegate) {
         this.mDelegate = delegate;
         if ("com.haibin.calendarview.WeekBar".equalsIgnoreCase(getClass().getName())) {
             setTextSize(mDelegate.getWeekTextSize());

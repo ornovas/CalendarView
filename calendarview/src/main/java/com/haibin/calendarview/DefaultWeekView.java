@@ -24,12 +24,12 @@ import android.graphics.Paint;
  * Created by huanghaibin on 2017/11/29.
  */
 
-public final class DefaultWeekView extends WeekView {
-    private Paint mTextPaint = new Paint();
-    private Paint mSchemeBasicPaint = new Paint();
-    private float mRadio;
-    private int mPadding;
-    private float mSchemeBaseLine;
+public class DefaultWeekView extends WeekView {
+    protected Paint mTextPaint = new Paint();
+    protected Paint mSchemeBasicPaint = new Paint();
+    protected float mRadio;
+    protected int mPadding;
+    protected float mSchemeBaseLine;
 
     public DefaultWeekView(Context context) {
         super(context);
@@ -84,7 +84,7 @@ public final class DefaultWeekView extends WeekView {
      * @param text text
      * @return return
      */
-    private float getTextWidth(String text) {
+    protected float getTextWidth(String text) {
         return mTextPaint.measureText(text);
     }
 

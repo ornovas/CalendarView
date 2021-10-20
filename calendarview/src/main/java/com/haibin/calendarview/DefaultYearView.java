@@ -25,7 +25,7 @@ import android.graphics.Canvas;
 
 public class DefaultYearView extends YearView {
 
-    private int mTextPadding;
+    protected int mTextPadding;
 
     public DefaultYearView(Context context) {
         super(context);
