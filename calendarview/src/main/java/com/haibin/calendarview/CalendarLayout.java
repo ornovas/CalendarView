@@ -591,8 +591,11 @@ public class CalendarLayout extends LinearLayout {
         super.onFinishInflate();
         mMonthView = findViewById(R.id.vp_month);
         mWeekPager = findViewById(R.id.vp_week);
-        if (getChildCount() > 0) {
-            mCalendarView = (CalendarView) getChildAt(0);
+        for (int i = 0; i < getChildCount(); i++) {
+            View child = getChildAt(i);
+            if (child instanceof CalendarView) {
+                mCalendarView = (CalendarView) child;
+            }
         }
         mContentView = findViewById(mContentViewId);
         mYearView = findViewById(R.id.selectLayout);
