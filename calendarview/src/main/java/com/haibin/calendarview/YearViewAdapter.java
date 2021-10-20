@@ -59,6 +59,12 @@ final class YearViewAdapter extends BaseRecyclerAdapter<Month> {
         RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,
                 RecyclerView.LayoutParams.MATCH_PARENT);
         yearView.setLayoutParams(params);
+
+        CalendarView.OnClassInitializeListener listener = mDelegate.mClassInitializeListener;
+        if (listener != null) {
+            listener.onClassInitialize(mDelegate.getYearViewClass(), yearView);
+        }
+
         return new YearViewHolder(yearView, mDelegate);
     }
 

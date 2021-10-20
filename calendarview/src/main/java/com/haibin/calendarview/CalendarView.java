@@ -112,6 +112,11 @@ public class CalendarView extends FrameLayout {
         mWeekBar.setup(mDelegate);
         mWeekBar.onWeekStartChange(mDelegate.getWeekStart());
 
+        CalendarView.OnClassInitializeListener listener = mDelegate.mClassInitializeListener;
+        if (listener != null) {
+            listener.onClassInitialize(mDelegate.getWeekBarClass(), mWeekBar);
+        }
+
         this.mWeekLine = findViewById(R.id.line);
         this.mWeekLine.setBackgroundColor(mDelegate.getWeekLineBackground());
         LayoutParams lineParams = (LayoutParams) this.mWeekLine.getLayoutParams();
@@ -811,6 +816,11 @@ public class CalendarView extends FrameLayout {
         mWeekBar.onWeekStartChange(mDelegate.getWeekStart());
         this.mMonthPager.mWeekBar = mWeekBar;
         mWeekBar.onDateSelected(mDelegate.mSelectedCalendar, mDelegate.getWeekStart(), false);
+
+        CalendarView.OnClassInitializeListener listener = mDelegate.mClassInitializeListener;
+        if (listener != null) {
+            listener.onClassInitialize(mDelegate.getWeekBarClass(), mWeekBar);
+        }
     }
 
 
@@ -1912,5 +1922,17 @@ public class CalendarView extends FrameLayout {
          */
         void onClickCalendarPadding(float x, float y, boolean isMonthView,
                                     Calendar adjacentCalendar, Object obj);
+    }
+
+    /**
+     * 2021-10-20
+     * class 对象创建时的初始化监听
+     * */
+    public interface OnClassInitializeListener{
+        void onClassInitialize(Class<?> cls, View view);
+    }
+
+    public void setOnClassInitialize(OnClassInitializeListener listener) {
+        this.mDelegate.mClassInitializeListener = listener;
     }
 }

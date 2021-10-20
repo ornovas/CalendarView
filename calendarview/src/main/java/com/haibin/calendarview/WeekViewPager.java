@@ -467,6 +467,11 @@ public final class WeekViewPager extends ViewPager {
             view.setTag(position);
             view.setSelectedCalendar(mDelegate.mSelectedCalendar);
             container.addView(view);
+
+            CalendarView.OnClassInitializeListener listener = mDelegate.mClassInitializeListener;
+            if (listener != null) {
+                listener.onClassInitialize(mDelegate.getWeekViewClass(), view);
+            }
             return view;
         }
 

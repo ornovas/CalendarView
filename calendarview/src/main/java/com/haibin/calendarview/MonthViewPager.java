@@ -631,6 +631,11 @@ public final class MonthViewPager extends ViewPager {
             view.initMonthWithDate(year, month);
             view.setSelectedCalendar(mDelegate.mSelectedCalendar);
             container.addView(view);
+
+            CalendarView.OnClassInitializeListener listener = mDelegate.mClassInitializeListener;
+            if (listener != null) {
+                listener.onClassInitialize(mDelegate.getMonthViewClass(), view);
+            }
             return view;
         }
 

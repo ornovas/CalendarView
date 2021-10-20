@@ -393,6 +393,9 @@ public class CalendarViewDelegate {
      */
     CalendarView.OnYearViewChangeListener mYearViewChangeListener;
 
+
+    CalendarView.OnClassInitializeListener mClassInitializeListener;
+
     /**
      * 保存选中的日期
      */
