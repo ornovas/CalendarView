@@ -21,6 +21,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
@@ -53,6 +54,9 @@ public final class MonthViewPager extends ViewPager {
      * 是否使用滚动到某一天
      */
     private boolean isUsingScrollToCalendar = false;
+
+    /**pager 方向*/
+    private int orientation = LinearLayout.HORIZONTAL;
 
     public MonthViewPager(Context context) {
         this(context, null);
@@ -569,12 +573,49 @@ public final class MonthViewPager extends ViewPager {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        return mDelegate.isMonthViewScrollable() && super.onTouchEvent(ev);
+        if (mDelegate.isMonthViewScrollable()) {
+            if (orientation == LinearLayout.VERTICAL) {
+                return super.onTouchEvent(swapTouchEvent(ev));
+            } else {
+                return super.onTouchEvent(ev);
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return mDelegate.isMonthViewScrollable() && super.onInterceptTouchEvent(ev);
+        if (mDelegate.isMonthViewScrollable()) {
+            if (orientation == LinearLayout.VERTICAL) {
+                return super.onInterceptTouchEvent(swapTouchEvent(ev));
+            }else {
+                return super.onInterceptTouchEvent(ev);
+            }
+        }
+        return false;
+    }
+
+    private MotionEvent swapTouchEvent(MotionEvent event) {
+        float width = getWidth();
+        float height = getHeight();
+
+        float swappedX = (event.getY() / height) * width;
+        float swappedY = (event.getX() / width) * height;
+
+        event.setLocation(swappedX, swappedY);
+
+        return event;
+    }
+
+    public int getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
+        if (orientation == LinearLayout.VERTICAL) {
+            setPageTransformer(true, new DefaultVerticalTransformer());
+        }
     }
 
     @Override

@@ -474,6 +474,15 @@ public class CalendarLayout extends LinearLayout {
         final int action = ev.getAction();
         float y = ev.getY();
         float x = ev.getX();
+
+        MonthViewPager monthViewPager = mCalendarView.getMonthViewPager();
+        if (monthViewPager.getOrientation() == LinearLayout.VERTICAL && !isWeekView) {
+            if (x >= monthViewPager.getLeft() && x <= monthViewPager.getRight() &&
+                    y >= monthViewPager.getTop() && y <= monthViewPager.getBottom()) {
+                return super.onInterceptTouchEvent(ev);
+            }
+        }
+
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 int index = ev.getActionIndex();
