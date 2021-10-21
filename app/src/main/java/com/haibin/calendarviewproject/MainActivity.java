@@ -277,6 +277,7 @@ public class MainActivity extends BaseActivity implements
         findViewById(R.id.ll_progress).setOnClickListener(this);
         findViewById(R.id.ll_custom).setOnClickListener(this);
         findViewById(R.id.ll_full).setOnClickListener(this);
+        findViewById(R.id.ll_vertical).setOnClickListener(this);
     }
 
     @Override
@@ -359,7 +360,9 @@ public class MainActivity extends BaseActivity implements
             case R.id.ll_progress:
                 ProgressActivity.show(this);
                 break;
-
+            case R.id.ll_vertical:
+                VerticalActivity.show(this);
+                break;
         }
     }
 
