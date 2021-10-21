@@ -166,9 +166,18 @@ public class VerticalMonthRecyclerView extends RecyclerView {
     }
 
     public void scrollToPre(boolean smoothScroll) {
+        LayoutManager layoutManager = getLayoutManager();
+        if (layoutManager == null) {
+            return;
+        }
         VerticalMonthViewHolder viewHolder = getViewHolder(0);
         if (viewHolder != null) {
-            setCurrentItem(viewHolder.getBindingAdapterPosition() - 1, smoothScroll);
+            int top = layoutManager.getDecoratedTop(viewHolder.itemView);
+            int position = viewHolder.getBindingAdapterPosition();
+            if (top == 0) {
+                position -= 1;
+            }
+            setCurrentItem(position, smoothScroll);
         }
     }
 
