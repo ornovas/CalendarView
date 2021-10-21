@@ -142,11 +142,7 @@ public class VerticalMonthRecyclerView extends RecyclerView {
                     @Override
                     public void run() {
                         ViewHolder holder = findViewHolderForAdapterPosition(position);
-                        if (holder == null) {
-                            setCurrentItem(position, true);
-                        } else {
-                            setCurrentItem(position, smoothScroll);
-                        }
+                        setCurrentItem(position, holder == null);
                     }
                 }, 240);
             } else {
