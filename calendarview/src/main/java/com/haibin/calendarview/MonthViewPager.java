@@ -357,6 +357,9 @@ public final class MonthViewPager extends ViewPager {
      * 滚动到当前日期
      */
     void scrollToCurrent(boolean smoothScroll) {
+        if (mDelegate == null) {
+            return;
+        }
         isUsingScrollToCalendar = true;
         int position = 12 * (mDelegate.getCurrentDay().getYear() - mDelegate.getMinYear()) +
                 mDelegate.getCurrentDay().getMonth() - mDelegate.getMinYearMonth();

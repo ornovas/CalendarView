@@ -141,4 +141,7 @@
     </declare-styleable>
 
 
+    <declare-styleable name="VerticalCalendarView">
+        <attr name="vertical_month_item_layout_id" format="reference" />
+    </declare-styleable>
 </resources>

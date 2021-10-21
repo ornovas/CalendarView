@@ -52,27 +52,27 @@ public class CalendarView extends FrameLayout {
     /**
      * 自定义自适应高度的ViewPager
      */
-    private MonthViewPager mMonthPager;
+    protected MonthViewPager mMonthPager;
 
     /**
      * 日历周视图
      */
-    private WeekViewPager mWeekPager;
+    protected WeekViewPager mWeekPager;
 
     /**
      * 星期栏的线
      */
-    private View mWeekLine;
+    protected View mWeekLine;
 
     /**
      * 月份快速选取
      */
-    private YearViewPager mYearViewPager;
+    protected YearViewPager mYearViewPager;
 
     /**
      * 星期栏
      */
-    private WeekBar mWeekBar;
+    protected WeekBar mWeekBar;
 
     /**
      * 日历外部收缩布局
@@ -90,13 +90,15 @@ public class CalendarView extends FrameLayout {
         init(context, attrs);
     }
 
+    public int calendarLayoutId = R.layout.cv_layout_calendar_view;
+
     /**
      * 初始化
      *
      * @param context context
      */
     protected void init(Context context, @Nullable AttributeSet attrs) {
-        LayoutInflater.from(context).inflate(R.layout.cv_layout_calendar_view, this, true);
+        LayoutInflater.from(context).inflate(calendarLayoutId, this, true);
         FrameLayout frameContent = findViewById(R.id.frameContent);
         this.mWeekPager = findViewById(R.id.vp_week);
         this.mWeekPager.setup(mDelegate);
@@ -314,7 +316,7 @@ public class CalendarView extends FrameLayout {
      *
      * @param year 年
      */
-    private void showSelectLayout(final int year) {
+    protected void showSelectLayout(final int year) {
         if (mParentLayout != null && mParentLayout.mContentView != null) {
             if (!mParentLayout.isExpand()) {
                 mParentLayout.expand();
@@ -387,7 +389,7 @@ public class CalendarView extends FrameLayout {
      *
      * @param position 某一年
      */
-    private void closeSelectLayout(final int position) {
+    protected void closeSelectLayout(final int position) {
         mYearViewPager.setVisibility(GONE);
         mWeekBar.setVisibility(VISIBLE);
         if (position == mMonthPager.getCurrentItem()) {
@@ -762,7 +764,7 @@ public class CalendarView extends FrameLayout {
      *
      * @param cls MonthView.class
      */
-    public final void setMonthView(Class<?> cls) {
+    public void setMonthView(Class<?> cls) {
         if (cls == null) {
             return;
         }
@@ -1253,7 +1255,7 @@ public class CalendarView extends FrameLayout {
      *
      * @param mSchemeDates mSchemeDatesMap 通过自己的需求转换即可
      */
-    public final void setSchemeDate(Map<String, Calendar> mSchemeDates) {
+    public void setSchemeDate(Map<String, Calendar> mSchemeDates) {
         this.mDelegate.mSchemeDatesMap = mSchemeDates;
         this.mDelegate.updateSelectCalendarScheme();
         this.mYearViewPager.update();
@@ -1264,7 +1266,7 @@ public class CalendarView extends FrameLayout {
     /**
      * 清空日期标记
      */
-    public final void clearSchemeDate() {
+    public void clearSchemeDate() {
         this.mDelegate.mSchemeDatesMap = null;
         this.mDelegate.clearSelectedScheme();
         mYearViewPager.update();
@@ -1934,5 +1936,13 @@ public class CalendarView extends FrameLayout {
 
     public void setOnClassInitialize(OnClassInitializeListener listener) {
         this.mDelegate.mClassInitializeListener = listener;
+    }
+
+    public interface OnVerticalItemInitializeListener{
+        void onVerticalItemInitialize(VerticalMonthRecyclerView.VerticalMonthViewHolder viewHolder, int position);
+    }
+
+    public void setOnVerticalItemInitialize(OnVerticalItemInitializeListener listener) {
+        this.mDelegate.mVerticalItemInitializeListener = listener;
     }
 }

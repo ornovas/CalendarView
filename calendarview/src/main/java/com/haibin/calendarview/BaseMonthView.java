@@ -68,9 +68,12 @@ public abstract class BaseMonthView extends BaseView {
         mYear = year;
         mMonth = month;
         initCalendar();
-        mHeight = CalendarUtil.getMonthViewHeight(year, month, mItemHeight, mDelegate.getWeekStart(),
+        int newHeight = CalendarUtil.getMonthViewHeight(year, month, mItemHeight, mDelegate.getWeekStart(),
                 mDelegate.getMonthViewShowMode());
-
+        if (mHeight != newHeight) {
+            requestLayout();
+        }
+        mHeight = newHeight;
     }
 
     /**
@@ -198,10 +201,13 @@ public abstract class BaseMonthView extends BaseView {
     @Override
     void updateItemHeight() {
         super.updateItemHeight();
-        mHeight = CalendarUtil.getMonthViewHeight(mYear, mMonth, mItemHeight, mDelegate.getWeekStart(),
+        int newHeight  = CalendarUtil.getMonthViewHeight(mYear, mMonth, mItemHeight, mDelegate.getWeekStart(),
                 mDelegate.getMonthViewShowMode());
+        if (mHeight != newHeight) {
+            requestLayout();
+        }
+        mHeight = newHeight;
     }
-
 
     @Override
     void updateCurrentDate() {

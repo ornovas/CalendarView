@@ -393,8 +393,12 @@ public class CalendarViewDelegate {
      */
     CalendarView.OnYearViewChangeListener mYearViewChangeListener;
 
-
+    /**
+     * 2021-10-21
+     * */
     CalendarView.OnClassInitializeListener mClassInitializeListener;
+
+    CalendarView.OnVerticalItemInitializeListener mVerticalItemInitializeListener;
 
     /**
      * 保存选中的日期
