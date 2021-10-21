@@ -16,22 +16,26 @@
             android:id="@+id/vp_month"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="41dp" />
+            android:layout_marginTop="41dp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <com.haibin.calendarview.WeekViewPager
             android:id="@+id/vp_week"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="41dp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:background="#0f000000"
+            tools:layout_marginTop="0dp"
+            tools:visibility="gone" />
 
         <View
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="40dp"
+            android:layout_marginRight="16dp"
             android:background="#cfcfcf" />
 
     </FrameLayout>
@@ -41,5 +45,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="gone" />
 </merge>

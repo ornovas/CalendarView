@@ -64,6 +64,10 @@ public final class MonthViewPager extends ViewPager {
 
     public MonthViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        if (isInEditMode()) {
+            setup(new CalendarViewDelegate(context, attrs));
+        }
     }
 
     /**
@@ -78,8 +82,10 @@ public final class MonthViewPager extends ViewPager {
                 mDelegate.getCurrentDay().getMonth());
 
         ViewGroup.LayoutParams params = getLayoutParams();
-        params.height = mCurrentViewHeight;
-        setLayoutParams(params);
+        if (params != null) {
+            params.height = mCurrentViewHeight;
+            setLayoutParams(params);
+        }
         init();
     }
 
@@ -197,7 +203,9 @@ public final class MonthViewPager extends ViewPager {
         if (mDelegate.getMonthViewShowMode() == CalendarViewDelegate.MODE_ALL_MONTH) {//非动态高度就不需要了
             mCurrentViewHeight = 6 * mDelegate.getCalendarItemHeight();
             ViewGroup.LayoutParams params = getLayoutParams();
-            params.height = mCurrentViewHeight;
+            if (params != null) {
+                params.height = mCurrentViewHeight;
+            }
             return;
         }
 

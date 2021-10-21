@@ -45,8 +45,11 @@ public final class YearViewPager extends ViewPager {
 
     public YearViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
-    }
 
+        if (isInEditMode()) {
+            setup(new CalendarViewDelegate(context, attrs));
+        }
+    }
 
     void setup(CalendarViewDelegate delegate) {
         this.mDelegate = delegate;

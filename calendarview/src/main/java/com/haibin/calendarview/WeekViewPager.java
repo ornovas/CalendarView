@@ -56,6 +56,10 @@ public final class WeekViewPager extends ViewPager {
 
     public WeekViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        if (isInEditMode()) {
+            setup(new CalendarViewDelegate(context, attrs));
+        }
     }
 
     void setup(CalendarViewDelegate delegate) {
