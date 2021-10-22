@@ -76,6 +76,9 @@ public class VerticalMonthRecyclerView extends RecyclerView {
         if (getVisibility() != VISIBLE) {
             return;
         }
+        if (mDelegate != null) {
+            setup(mDelegate);
+        }
         updateSelected();
     }
 

@@ -82,8 +82,9 @@ public class VerticalCalendarView extends CalendarView {
         mMonthPager = new MonthViewPager(context); //提供一个占位用的视图, 防止库NPE异常
         this.monthRecyclerView = findViewById(R.id.rv_month);
         monthRecyclerView.verticalMonthItemLayoutId = verticalMonthItemLayoutId;
-        //this.monthRecyclerView.mWeekPager = mWeekPager;
-        //this.monthRecyclerView.mWeekBar = mWeekBar;
+        //this.mMonthPager.mWeekPager = mWeekPager;
+        //this.mMonthPager.mWeekBar = mWeekBar;
+        //mMonthPager.setup(mDelegate);
         LayoutParams params = (LayoutParams) this.monthRecyclerView.getLayoutParams();
         params.setMargins(0, mDelegate.getWeekBarHeight() + CalendarUtil.dipToPx(context, 1), 0, 0);
         mWeekPager.setLayoutParams(params);
