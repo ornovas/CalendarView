@@ -23,6 +23,8 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewParent;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
@@ -320,27 +322,59 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getPointerCount() > 1)
             return false;
+        float touchX, touchY;
+        if (isVerticalMonth()) {
+            float[] originTouch = getOriginTouch(event);
+            touchX = originTouch[0];
+            touchY = originTouch[1];
+        } else {
+            touchX = event.getX();
+            touchY = event.getY();
+        }
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                mX = event.getX();
-                mY = event.getY();
+                mX = touchX;
+                mY = touchY;
                 isClick = true;
                 break;
             case MotionEvent.ACTION_MOVE:
                 float mDY;
                 if (isClick) {
-                    mDY = event.getY() - mY;
+                    mDY = touchY - mY;
                     isClick = Math.abs(mDY) <= 50;
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                mX = event.getX();
-                mY = event.getY();
+                mX = touchX;
+                mY = touchY;
                 break;
         }
         return super.onTouchEvent(event);
     }
 
+    /**
+     * 是否是垂直滚动的月视图
+     */
+    protected boolean isVerticalMonth() {
+        ViewParent parent = getParent();
+        if (parent instanceof MonthViewPager) {
+            return ((MonthViewPager) parent).getOrientation() == LinearLayout.VERTICAL;
+        }
+        return false;
+    }
+
+    protected float[] getOriginTouch(MotionEvent event) {
+        float[] result = new float[2];
+        int[] local = new int[2];
+        ViewParent parent = getParent();
+        if (parent instanceof MonthViewPager) {
+            ((MonthViewPager) parent).getLocationOnScreen(local);
+            result[0] = event.getRawX();
+            result[1] = event.getRawY() - local[1];
+        }
+        return result;
+    }
 
     /**
      * 开始绘制前的钩子，这里做一些初始化的操作，每次绘制只调用一次，性能高效
