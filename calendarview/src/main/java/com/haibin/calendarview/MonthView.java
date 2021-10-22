@@ -42,6 +42,11 @@ public abstract class MonthView extends BaseMonthView {
         for (int i = 0; i < mLineCount; i++) {
             for (int j = 0; j < 7; j++) {
                 Calendar calendar = mItems.get(d);
+                if (isInEditMode()) {
+                    if (mCurrentItem < 0 && calendar.isCurrentMonth()) {
+                        mCurrentItem = d;
+                    }
+                }
                 if (mDelegate.getMonthViewShowMode() == CalendarViewDelegate.MODE_ONLY_CURRENT_MONTH) {
                     if (d > mItems.size() - mNextDiff) {
                         return;
@@ -71,7 +76,7 @@ public abstract class MonthView extends BaseMonthView {
      * @param j        j
      * @param d        d
      */
-    private void draw(Canvas canvas, Calendar calendar, int i, int j, int d) {
+    protected void draw(Canvas canvas, Calendar calendar, int i, int j, int d) {
         int x = j * mItemWidth + mDelegate.getCalendarPaddingLeft();
         int y = i * mItemHeight;
         onLoopStart(x, y);
