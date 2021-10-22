@@ -43,8 +43,16 @@ public abstract class MonthView extends BaseMonthView {
             for (int j = 0; j < 7; j++) {
                 Calendar calendar = mItems.get(d);
                 if (isInEditMode()) {
-                    if (mCurrentItem < 0 && calendar.isCurrentMonth()) {
-                        mCurrentItem = d;
+                    if (calendar.isCurrentMonth()) {
+                        if (mCurrentItem < 0) {
+                            //预览选中的效果
+                            mCurrentItem = d;
+                        } else {
+                            //预览scheme效果
+                            if (!calendar.hasScheme() && i == 1 && j == 0) {
+                                calendar.setScheme(mDelegate.getSchemeText());
+                            }
+                        }
                     }
                 }
                 if (mDelegate.getMonthViewShowMode() == CalendarViewDelegate.MODE_ONLY_CURRENT_MONTH) {

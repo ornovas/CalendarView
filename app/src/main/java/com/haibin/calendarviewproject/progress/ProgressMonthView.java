@@ -51,7 +51,13 @@ public class ProgressMonthView extends MonthView {
         int cx = x + mItemWidth / 2;
         int cy = y + mItemHeight / 2;
 
-        int angle = getAngle(Integer.parseInt(calendar.getScheme()));
+        int angle = 0;
+
+        try {
+            angle =  getAngle(Integer.parseInt(calendar.getScheme()));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
 
         RectF progressRectF = new RectF(cx - mRadius, cy - mRadius, cx + mRadius, cy + mRadius);
         canvas.drawArc(progressRectF, -90, angle, false, mProgressPaint);
