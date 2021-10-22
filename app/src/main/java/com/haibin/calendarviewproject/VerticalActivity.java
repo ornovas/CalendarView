@@ -54,6 +54,7 @@ public class VerticalActivity extends BaseActivity implements
         mTextLunar = findViewById(R.id.tv_lunar);
         mRelativeTool = findViewById(R.id.rl_tool);
         mCalendarView = findViewById(R.id.calendarView);
+        mCalendarView.setRange(2021, 7, 1, 2022, 4, 28);
         mTextCurrentDay = findViewById(R.id.tv_current_day);
         mTextMonthDay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +100,8 @@ public class VerticalActivity extends BaseActivity implements
         mTextMonthDay.setText(mCalendarView.getCurMonth() + "月" + mCalendarView.getCurDay() + "日");
         mTextLunar.setText("今日");
         mTextCurrentDay.setText(String.valueOf(mCalendarView.getCurDay()));
+
+        mCalendarView.scrollToCurrent();
     }
 
     @Override
