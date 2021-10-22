@@ -606,7 +606,16 @@ public final class MonthViewPager extends ViewPager {
         return false;
     }
 
+    /**
+     * 交换之前的x, y坐标
+     */
+    public float originX = -1f;
+    public float originY = -1f;
+
     private MotionEvent swapTouchEvent(MotionEvent event) {
+        originX = event.getX();
+        originY = event.getY();
+
         float width = getWidth();
         float height = getHeight();
 

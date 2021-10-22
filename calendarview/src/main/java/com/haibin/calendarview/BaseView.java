@@ -370,7 +370,7 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
         ViewParent parent = getParent();
         if (parent instanceof MonthViewPager) {
             ((MonthViewPager) parent).getLocationOnScreen(local);
-            result[0] = event.getRawX();
+            result[0] = event.getRawX() - local[0];
             result[1] = event.getRawY() - local[1];
         }
         return result;
