@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity implements
         mCalendarView = findViewById(R.id.calendarView);
 
         //垂直滚动
-        //mCalendarView.getMonthViewPager().setOrientation(LinearLayout.VERTICAL);
+        mCalendarView.getMonthViewPager().setOrientation(LinearLayout.VERTICAL);
 
         //mCalendarView.setRange(2018, 7, 1, 2019, 4, 28);
         mTextCurrentDay = findViewById(R.id.tv_current_day);

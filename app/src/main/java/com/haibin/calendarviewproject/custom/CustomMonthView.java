@@ -105,7 +105,12 @@ public class CustomMonthView extends MonthView {
     protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
         int cx = x + mItemWidth / 2;
         int cy = y + mItemHeight / 2;
-        canvas.drawCircle(cx, cy, mRadius, mSelectedPaint);
+        if (isTouchDown && mCurrentItem == mItems.indexOf(getIndex())) {
+            //点击当前选中的item, 缩放效果提示
+            canvas.drawCircle(cx, cy, mRadius - dipToPx(getContext(), 4), mSelectedPaint);
+        } else {
+            canvas.drawCircle(cx, cy, mRadius, mSelectedPaint);
+        }
         return true;
     }
 
