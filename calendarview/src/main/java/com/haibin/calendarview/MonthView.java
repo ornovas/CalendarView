@@ -37,6 +37,16 @@ public abstract class MonthView extends BaseMonthView {
                 mDelegate.getCalendarPaddingLeft() -
                 mDelegate.getCalendarPaddingRight()) / 7;
         onPreviewHook();
+        onDrawCalendar(canvas);
+        if (monthAnimHelper != null) {
+            monthAnimHelper.draw(this, canvas);
+        }
+    }
+
+    /**
+     * 开始绘制日历
+     */
+    protected void onDrawCalendar(Canvas canvas) {
         int count = mLineCount * 7;
         int d = 0;
         for (int i = 0; i < mLineCount; i++) {
@@ -74,7 +84,6 @@ public abstract class MonthView extends BaseMonthView {
         }
     }
 
-
     /**
      * 开始绘制
      *
@@ -87,8 +96,20 @@ public abstract class MonthView extends BaseMonthView {
     protected void draw(Canvas canvas, Calendar calendar, int i, int j, int d) {
         int x = j * mItemWidth + mDelegate.getCalendarPaddingLeft();
         int y = i * mItemHeight;
-        onLoopStart(x, y);
         boolean isSelected = d == mCurrentItem;
+        if (monthAnimHelper != null && monthAnimHelper.isStarted()) {
+            if (monthAnimHelper.calendar == mItems.get(mCurrentItem)) {
+                //有动画执行时, 取消目标动画的选中绘制
+                isSelected = false;
+            }
+        }
+        drawCalendar(canvas, calendar, x, y, isSelected);
+    }
+
+    /**在指定的x,y绘制日历*/
+    protected void drawCalendar(Canvas canvas, Calendar calendar, int x, int y, boolean isSelected) {
+        onLoopStart(x, y);
+
         boolean hasScheme = calendar.hasScheme();
 
         if (hasScheme) {
@@ -109,7 +130,6 @@ public abstract class MonthView extends BaseMonthView {
         }
         onDrawText(canvas, calendar, x, y, hasScheme, isSelected);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -140,7 +160,12 @@ public abstract class MonthView extends BaseMonthView {
             return;
         }
 
-        mCurrentItem = mItems.indexOf(calendar);
+        int clickIndex = mItems.indexOf(calendar);
+        int oldItem = mCurrentItem;
+        mCurrentItem = clickIndex;
+        if (calendar.isCurrentMonth() && oldItem != -1 && oldItem != mCurrentItem) {
+            onChangeItemTo(oldItem, mCurrentItem);
+        }
 
         if (!calendar.isCurrentMonth() && mMonthViewPager != null) {
             int cur = mMonthViewPager.getCurrentItem();
@@ -154,7 +179,7 @@ public abstract class MonthView extends BaseMonthView {
 
         if (mParentLayout != null) {
             if (calendar.isCurrentMonth()) {
-                mParentLayout.updateSelectPosition(mItems.indexOf(calendar));
+                mParentLayout.updateSelectPosition(clickIndex);
             } else {
                 mParentLayout.updateSelectWeek(CalendarUtil.getWeekFromDayInMonth(calendar, mDelegate.getWeekStart()));
             }
@@ -236,6 +261,19 @@ public abstract class MonthView extends BaseMonthView {
         }
         invalidate();
         return true;
+    }
+
+    protected MonthAnimHelper monthAnimHelper;
+
+    /**
+     * 同月内,日的切换
+     */
+    protected void onChangeItemTo(int from, int to) {
+        if (monthAnimHelper != null) {
+            monthAnimHelper.cancel();
+        }
+        monthAnimHelper = new MonthAnimHelper();
+        monthAnimHelper.startAnim(this, from, to);
     }
 
     /**
