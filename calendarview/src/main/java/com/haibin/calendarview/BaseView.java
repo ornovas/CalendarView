@@ -134,6 +134,9 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
      */
     boolean isClick = true;
 
+    /**手势是否按下*/
+    protected boolean isTouchDown = false;
+
     /**
      * 字体大小
      */
@@ -142,7 +145,7 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     /**
      * 当前点击项
      */
-    int mCurrentItem = -1;
+    protected int mCurrentItem = -1;
 
     /**
      * 周起始
@@ -336,7 +339,8 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
             case MotionEvent.ACTION_DOWN:
                 mX = touchX;
                 mY = touchY;
-                isClick = true;
+                isTouchDown = true;
+                invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
                 float mDY;
@@ -348,6 +352,12 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
             case MotionEvent.ACTION_UP:
                 mX = touchX;
                 mY = touchY;
+                isTouchDown = false;
+                invalidate();
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                isTouchDown = false;
+                invalidate();
                 break;
         }
         return super.onTouchEvent(event);
