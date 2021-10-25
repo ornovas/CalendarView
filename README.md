@@ -1,3 +1,135 @@
+
+基于原库`3.7.1`的版本修改, 实现了如下功能:
+
+
+-  `垂直列表日历`: 基于`RecyclerView`实现
+
+> 月份的排列方式是上下结构, `上一个月` `当前月` `下一个月`在垂直方向排列
+
+- `垂直滚动日历`: 通过交换`ViewPager`的`TouchEvent`实现
+
+> 可以通过`下滑` `上滑`的方式, 切换`上一个月` `下一个月`
+
+- `touchDown`时的效果提示支持, 需要在`onDraw`方法中自定义实现
+
+> 通过此标识, 可以实现`手指按下时`缩放背景的效果
+
+- `周/月视图选择日历的动画`在月/周视图中, 切换不同日的日历时的动画支持
+
+> 日期切换时, 有动画效果
+
+# 使用方式如下:
+
+## 加入仓库地址
+
+```
+allprojects {
+  repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+  }
+}
+```
+
+## 加入依赖
+
+```
+implementation 'com.github.angcyo:CalendarView:3.7.1.22'
+```
+
+### `垂直滚动日历`使用方式
+
+```
+mCalendarView.getMonthViewPager().setOrientation(LinearLayout.VERTICAL);
+```
+
+### `垂直列表日历`使用方式
+
+使用`VerticalCalendarView`控件即可.
+
+```
+com.haibin.calendarview.VerticalCalendarView
+```
+
+### `按下效果`实现参考代码
+
+自定义`MonthView`控件, 实现如下方法:
+
+```
+@Override
+protected boolean onDrawSelected(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme) {
+    int cx = x + mItemWidth / 2;
+    int cy = y + mItemHeight / 2;
+    if (isTouchDown && mCurrentItem == mItems.indexOf(getIndex())) {
+        //点击当前选中的item, 缩放效果提示
+        canvas.drawCircle(cx, cy, mRadius - dipToPx(getContext(), 4), mSelectedPaint);
+    } else {
+        canvas.drawCircle(cx, cy, mRadius, mSelectedPaint);
+    }
+    return true;
+}
+```
+
+## 开源地址
+
+感谢作者的开源库!
+
+https://github.com/angcyo/CalendarView
+
+---
+
+## 周视图直接滚动到`上一个月`或`下一个月`
+
+### `上一个月`
+
+```
+int currentItem = mWeekPager.getCurrentItem();
+BaseView baseView = mWeekPager.findViewWithTag(currentItem);
+Calendar firstCalendar = baseView.mItems.get(0);
+int days = CalendarUtil.getMonthDaysCount(firstCalendar.getYear(), firstCalendar.getMonth());
+Calendar targetCalendar = CalendarUtil.getCalendarWidthDiffer(firstCalendar, - days * ONE_DAY);
+mWeekPager.scrollToCalendar(targetCalendar.getYear(), targetCalendar.getMonth(), targetCalendar.getDay(), smoothScroll, false);
+
+```
+
+### `下一个月`
+
+```
+int currentItem = mWeekPager.getCurrentItem();
+BaseView baseView = mWeekPager.findViewWithTag(currentItem);
+Calendar firstCalendar = baseView.mItems.get(0);
+int days = CalendarUtil.getMonthDaysCount(firstCalendar.getYear(), firstCalendar.getMonth());
+Calendar targetCalendar = CalendarUtil.getCalendarWidthDiffer(firstCalendar, days * ONE_DAY);
+mWeekPager.scrollToCalendar(targetCalendar.getYear(), targetCalendar.getMonth(), targetCalendar.getDay(), smoothScroll, false);
+```
+
+**工具类**
+
+```
+/**
+ * 获取指定相差天数的日历
+ * [millis] 相差的毫秒数
+ * */
+public static Calendar getCalendarWidthDiffer(Calendar calendar, long millis) {
+    java.util.Calendar date = java.util.Calendar.getInstance();
+
+    date.set(calendar.getYear(), calendar.getMonth() - 1, calendar.getDay(), 12, 0, 0);//
+
+    long timeMills = date.getTimeInMillis();//获得起始时间戳
+
+    date.setTimeInMillis(timeMills + millis);
+
+    Calendar preCalendar = new Calendar();
+    preCalendar.setYear(date.get(java.util.Calendar.YEAR));
+    preCalendar.setMonth(date.get(java.util.Calendar.MONTH) + 1);
+    preCalendar.setDay(date.get(java.util.Calendar.DAY_OF_MONTH));
+
+    return preCalendar;
+}
+```
+
+---
+
 # CalenderView
 
 An elegant CalendarView on Android platform.
