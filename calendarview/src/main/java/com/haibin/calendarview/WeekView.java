@@ -39,34 +39,48 @@ public abstract class WeekView extends BaseWeekView {
         if (mItems.size() == 0)
             return;
         mItemWidth = (getWidth() -
-                 mDelegate.getCalendarPaddingLeft() -
-                 mDelegate.getCalendarPaddingRight()) / 7;
+                mDelegate.getCalendarPaddingLeft() -
+                mDelegate.getCalendarPaddingRight()) / 7;
         onPreviewHook();
 
         for (int i = 0; i < mItems.size(); i++) {
             int x = i * mItemWidth + mDelegate.getCalendarPaddingLeft();
-            onLoopStart(x);
-            Calendar calendar = mItems.get(i);
             boolean isSelected = i == mCurrentItem;
-            boolean hasScheme = calendar.hasScheme();
-            if (hasScheme) {
-                boolean isDrawSelected = false;//是否继续绘制选中的onDrawScheme
-                if (isSelected) {
-                    isDrawSelected = onDrawSelected(canvas, calendar, x, true);
-                }
-                if (isDrawSelected || !isSelected) {
-                    //将画笔设置为标记颜色
-                    mSchemePaint.setColor(calendar.getSchemeColor() != 0 ?
-                            calendar.getSchemeColor() : mDelegate.getSchemeThemeColor());
-                    onDrawScheme(canvas, calendar, x);
-                }
-            } else {
-                if (isSelected) {
-                    onDrawSelected(canvas, calendar, x, false);
+            if (weekAnimHelper != null && weekAnimHelper.isStarted()) {
+                if (weekAnimHelper.calendar == mItems.get(mCurrentItem)) {
+                    //有动画执行时, 取消目标动画的选中绘制
+                    isSelected = false;
                 }
             }
-            onDrawText(canvas, calendar, x, hasScheme, isSelected);
+            Calendar calendar = mItems.get(i);
+            drawCalendar(canvas, calendar, x, isSelected);
         }
+
+        if (weekAnimHelper != null) {
+            weekAnimHelper.draw(this, canvas);
+        }
+    }
+
+    protected void drawCalendar(Canvas canvas, Calendar calendar, int x, boolean isSelected) {
+        onLoopStart(x);
+        boolean hasScheme = calendar.hasScheme();
+        if (hasScheme) {
+            boolean isDrawSelected = false;//是否继续绘制选中的onDrawScheme
+            if (isSelected) {
+                isDrawSelected = onDrawSelected(canvas, calendar, x, true);
+            }
+            if (isDrawSelected || !isSelected) {
+                //将画笔设置为标记颜色
+                mSchemePaint.setColor(calendar.getSchemeColor() != 0 ?
+                        calendar.getSchemeColor() : mDelegate.getSchemeThemeColor());
+                onDrawScheme(canvas, calendar, x);
+            }
+        } else {
+            if (isSelected) {
+                onDrawSelected(canvas, calendar, x, false);
+            }
+        }
+        onDrawText(canvas, calendar, x, hasScheme, isSelected);
     }
 
     @Override
@@ -89,7 +103,12 @@ public abstract class WeekView extends BaseWeekView {
             return;
         }
 
-        mCurrentItem = mItems.indexOf(calendar);
+        int clickIndex = mItems.indexOf(calendar);
+        int oldItem = mCurrentItem;
+        mCurrentItem = clickIndex;
+        if (oldItem != -1 && oldItem != mCurrentItem) {
+            onChangeItemTo(oldItem, mCurrentItem);
+        }
 
         if (mDelegate.mInnerListener != null) {
             mDelegate.mInnerListener.onWeekDateSelected(calendar, true);
@@ -138,8 +157,12 @@ public abstract class WeekView extends BaseWeekView {
             return true;
         }
 
-
-        mCurrentItem = mItems.indexOf(calendar);
+        int clickIndex = mItems.indexOf(calendar);
+        int oldItem = mCurrentItem;
+        mCurrentItem = clickIndex;
+        if (oldItem != -1 && oldItem != mCurrentItem) {
+            onChangeItemTo(oldItem, mCurrentItem);
+        }
 
         mDelegate.mIndexCalendar = mDelegate.mSelectedCalendar;
 
@@ -161,6 +184,19 @@ public abstract class WeekView extends BaseWeekView {
 
         invalidate();
         return true;
+    }
+
+    protected WeekAnimHelper weekAnimHelper;
+
+    /**
+     * 周视图, 日切换的动画
+     */
+    protected void onChangeItemTo(int from, int to) {
+        if (weekAnimHelper != null) {
+            weekAnimHelper.cancel();
+        }
+        weekAnimHelper = new WeekAnimHelper();
+        weekAnimHelper.startAnim(this, from, to);
     }
 
     /**
