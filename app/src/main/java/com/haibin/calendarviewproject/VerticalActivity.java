@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.haibin.calendarview.BaseMonthView;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarView;
 import com.haibin.calendarview.VerticalCalendarView;
+import com.haibin.calendarview.VerticalMonthRecyclerView;
 import com.haibin.calendarviewproject.base.activity.BaseActivity;
 import com.haibin.calendarviewproject.multi.CustomMultiMonthView;
 import com.haibin.calendarviewproject.range.CustomRangeMonthView;
@@ -100,6 +102,16 @@ public class VerticalActivity extends BaseActivity implements
         mTextMonthDay.setText(mCalendarView.getCurMonth() + "月" + mCalendarView.getCurDay() + "日");
         mTextLunar.setText("今日");
         mTextCurrentDay.setText(String.valueOf(mCalendarView.getCurDay()));
+
+
+        mCalendarView.setOnVerticalItemInitialize(new CalendarView.OnVerticalItemInitializeListener() {
+
+            @Override
+            public void onVerticalItemInitialize(VerticalMonthRecyclerView.VerticalMonthViewHolder viewHolder, int position, int year, int month) {
+                View itemView = viewHolder.itemView;
+                BaseMonthView monthView = viewHolder.monthView;
+            }
+        });
 
         mCalendarView.scrollToCurrent();
     }
