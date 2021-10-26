@@ -213,7 +213,7 @@ public class VerticalMonthRecyclerView extends RecyclerView {
         setCurrentItem(mDelegate.mCurrentMonthViewItem, false);
     }
 
-    protected static class VerticalMonthViewHolder extends RecyclerView.ViewHolder {
+    public static class VerticalMonthViewHolder extends RecyclerView.ViewHolder {
 
         public BaseMonthView monthView;
 
@@ -270,7 +270,7 @@ public class VerticalMonthRecyclerView extends RecyclerView {
 
             CalendarView.OnVerticalItemInitializeListener verticalItemInitializeListener = mDelegate.mVerticalItemInitializeListener;
             if (verticalItemInitializeListener != null) {
-                verticalItemInitializeListener.onVerticalItemInitialize(viewHolder, position);
+                verticalItemInitializeListener.onVerticalItemInitialize(viewHolder, position, year, month);
             }
         }
 

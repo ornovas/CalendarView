@@ -1943,7 +1943,7 @@ public class CalendarView extends FrameLayout {
     }
 
     public interface OnVerticalItemInitializeListener{
-        void onVerticalItemInitialize(VerticalMonthRecyclerView.VerticalMonthViewHolder viewHolder, int position);
+        void onVerticalItemInitialize(VerticalMonthRecyclerView.VerticalMonthViewHolder viewHolder, int position, int year, int month);
     }
 
     public void setOnVerticalItemInitialize(OnVerticalItemInitializeListener listener) {
