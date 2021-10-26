@@ -671,9 +671,13 @@ public final class MonthViewPager extends ViewPager {
     }
 
     public void setOrientation(int orientation) {
+        setOrientation(orientation, new DefaultVerticalTransformer());
+    }
+
+    public void setOrientation(int orientation, BaseVerticalTransformer transformer) {
         this.orientation = orientation;
         if (orientation == LinearLayout.VERTICAL) {
-            setPageTransformer(true, new DefaultVerticalTransformer());
+            setPageTransformer(true, transformer);
         }
     }
 

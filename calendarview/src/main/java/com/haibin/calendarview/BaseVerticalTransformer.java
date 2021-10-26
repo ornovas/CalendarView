@@ -17,18 +17,14 @@ package com.haibin.calendarview;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.viewpager.widget.ViewPager;
 
-public class DefaultVerticalTransformer extends BaseVerticalTransformer {
+public abstract class BaseVerticalTransformer implements ViewPager.PageTransformer {
 
     @Override
     public void transformPage(@NonNull View page, float position) {
-        super.transformPage(page, position);
-        if (0 <= position && position <= 1) {
-            float alpha = 1 - position;
-            page.setAlpha(alpha);
-        } else if (-1 < position && position < 0) {
-            float alpha = position + 1;
-            page.setAlpha(alpha);
-        }
+        page.setTranslationX(page.getWidth() * -position);
+        float yPosition = position * page.getHeight();
+        page.setTranslationY(yPosition);
     }
 }
