@@ -424,6 +424,9 @@ public class CalendarViewDelegate {
 
     private int mMinSelectRange, mMaxSelectRange;
 
+    /**是否显示年视图, 预览模式下有效*/
+    boolean showYearView = false;
+
     CalendarViewDelegate(Context context, @Nullable AttributeSet attrs) {
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CalendarView);
 
@@ -528,6 +531,7 @@ public class CalendarViewDelegate {
                 CalendarUtil.dipToPx(context, 12));
         mYearViewPaddingRight = (int) array.getDimension(R.styleable.CalendarView_year_view_padding_right,
                 CalendarUtil.dipToPx(context, 12));
+        showYearView = array.getBoolean(R.styleable.CalendarView_year_view_show, showYearView);
 
         if (mYearViewPadding != 0) {
             mYearViewPaddingLeft = mYearViewPadding;

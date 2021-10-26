@@ -54,6 +54,8 @@
         <attr name="year_view_week_height" format="dimension" />
         <attr name="year_view_week_text_size" format="dimension" />
         <attr name="year_view_week_text_color" format="color" />
+        <!--预览属性, 是否显示年视图-->
+        <attr name="year_view_show" format="boolean" />
 
         <attr name="year_view_padding" format="dimension" />
         <attr name="year_view_padding_left" format="dimension" />
@@ -71,7 +73,6 @@
         <attr name="max_year_month" format="integer" />
         <attr name="min_year_day" format="integer" />
         <attr name="max_year_day" format="integer" />
-
 
         <!--月视图是否可滚动-->
         <attr name="month_view_scrollable" format="boolean" />

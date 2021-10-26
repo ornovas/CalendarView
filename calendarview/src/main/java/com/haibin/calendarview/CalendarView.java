@@ -88,6 +88,10 @@ public class CalendarView extends FrameLayout {
         super(context, attrs);
         mDelegate = new CalendarViewDelegate(context, attrs);
         init(context, attrs);
+
+        if (isInEditMode() && mYearViewPager != null && mDelegate.showYearView) {
+            mYearViewPager.setVisibility(View.VISIBLE);
+        }
     }
 
     public int calendarLayoutId = R.layout.cv_layout_calendar_view;
