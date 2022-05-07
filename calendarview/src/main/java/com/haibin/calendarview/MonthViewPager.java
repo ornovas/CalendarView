@@ -55,7 +55,9 @@ public final class MonthViewPager extends ViewPager {
      */
     private boolean isUsingScrollToCalendar = false;
 
-    /**pager 方向*/
+    /**
+     * pager 方向
+     */
     private int orientation = LinearLayout.HORIZONTAL;
 
     public MonthViewPager(Context context) {
@@ -638,7 +640,7 @@ public final class MonthViewPager extends ViewPager {
         if (mDelegate.isMonthViewScrollable()) {
             if (orientation == LinearLayout.VERTICAL) {
                 return super.onInterceptTouchEvent(swapTouchEvent(ev));
-            }else {
+            } else {
                 return super.onInterceptTouchEvent(ev);
             }
         }
@@ -670,6 +672,9 @@ public final class MonthViewPager extends ViewPager {
         return orientation;
     }
 
+    /**
+     * 设置滚动方向, 如:垂直滚动, 水平滚动
+     */
     public void setOrientation(int orientation) {
         setOrientation(orientation, new DefaultVerticalTransformer());
     }

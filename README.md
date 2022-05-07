@@ -22,17 +22,16 @@
 ## 效果图
 
 垂直滚动 | 垂直列表
- ---     | ---
+ ---    | ---
 ![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_vertical_scroll.gif)|![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_vertical_list.gif)
 
 月视图动画 | 周视图动画
- ---       | ---
+ ---      | ---
 ![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_month_anim.gif)|![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_week_anim.gif)
 
-按下效果 | --
- ---     | ---
-![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_touch_down.gif) | --
-
+按下效果 | ---
+ ---    | ---
+![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_touch_down.gif) | ---
 
 # 使用方式如下:
 
