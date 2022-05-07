@@ -121,6 +121,21 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
      */
     private Calendar lunarCalendar;
 
+    /**
+     * 当前日期在绘制时的索引
+     *
+     * @see MonthView#onDrawCalendar(android.graphics.Canvas)
+     * @see WeekView#onDraw(android.graphics.Canvas)
+     */
+    private int drawIndex = 0;
+
+    public int getDrawIndex() {
+        return drawIndex;
+    }
+
+    public void setDrawIndex(int drawIndex) {
+        this.drawIndex = drawIndex;
+    }
 
     public int getYear() {
         return year;
@@ -350,7 +365,7 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
      * @return 日期是否可用
      */
     public boolean isAvailable() {
-        return year > 0 & month > 0 & day > 0 & day <=31 & month <= 12 & year >= 1900 & year <= 2099;
+        return year > 0 & month > 0 & day > 0 & day <= 31 & month <= 12 & year >= 1900 & year <= 2099;
     }
 
     /**

@@ -37,12 +37,12 @@ import java.util.List;
 
 public abstract class BaseView extends View implements View.OnClickListener, View.OnLongClickListener {
 
-    CalendarViewDelegate mDelegate;
+    protected CalendarViewDelegate mDelegate;
 
     /**
      * 当前月份日期的笔
      */
-    protected Paint mCurMonthTextPaint = new Paint();
+    public Paint mCurMonthTextPaint = new Paint();
 
     /**
      * 其它月份日期颜色
@@ -112,12 +112,12 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     /**
      * 每一项的高度
      */
-    protected int mItemHeight;
+    public int mItemHeight;
 
     /**
      * 每一项的宽度
      */
-    protected int mItemWidth;
+    public int mItemWidth;
 
     /**
      * Text的基线

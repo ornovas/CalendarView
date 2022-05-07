@@ -58,10 +58,15 @@ public abstract class MonthView extends BaseMonthView {
                             //预览选中的效果
                             mCurrentItem = d;
                         } else {
-                            //预览scheme效果
+                            //预览当月scheme效果
                             if (!calendar.hasScheme() && i == 1 && j == 0) {
                                 calendar.setScheme(mDelegate.getSchemeText());
                             }
+                        }
+                    } else {
+                        //预览其他月scheme效果
+                        if (!calendar.hasScheme() && i == 0 && j == 0) {
+                            calendar.setScheme(mDelegate.getSchemeText());
                         }
                     }
                 }
@@ -78,6 +83,7 @@ public abstract class MonthView extends BaseMonthView {
                         return;
                     }
                 }
+                calendar.setDrawIndex(d);
                 draw(canvas, calendar, i, j, d);
                 ++d;
             }
@@ -106,7 +112,9 @@ public abstract class MonthView extends BaseMonthView {
         drawCalendar(canvas, calendar, x, y, isSelected);
     }
 
-    /**在指定的x,y绘制日历*/
+    /**
+     * 在指定的x,y绘制日历
+     */
     protected void drawCalendar(Canvas canvas, Calendar calendar, int x, int y, boolean isSelected) {
         onLoopStart(x, y);
 

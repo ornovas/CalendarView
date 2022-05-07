@@ -395,7 +395,7 @@ public class CalendarViewDelegate {
 
     /**
      * 2021-10-21
-     * */
+     */
     CalendarView.OnClassInitializeListener mClassInitializeListener;
 
     CalendarView.OnVerticalItemInitializeListener mVerticalItemInitializeListener;
@@ -424,7 +424,9 @@ public class CalendarViewDelegate {
 
     private int mMinSelectRange, mMaxSelectRange;
 
-    /**是否显示年视图, 预览模式下有效*/
+    /**
+     * 是否显示年视图, 预览模式下有效
+     */
     boolean showYearView = false;
 
     CalendarViewDelegate(Context context, @Nullable AttributeSet attrs) {
@@ -642,7 +644,7 @@ public class CalendarViewDelegate {
         return mWeekTextColor;
     }
 
-    int getSchemeTextColor() {
+    public int getSchemeTextColor() {
         return mSchemeTextColor;
     }
 
