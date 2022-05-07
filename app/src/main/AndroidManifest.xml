@@ -37,6 +37,7 @@
         <activity android:name=".TestActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".VerticalActivity" />
+        <activity android:name=".mark.SimpleMarkActivity" />
     </application>
 
 </manifest>
