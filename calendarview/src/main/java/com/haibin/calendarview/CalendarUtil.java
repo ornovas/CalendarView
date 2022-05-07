@@ -297,7 +297,7 @@ public final class CalendarUtil {
     static int getMonthEndDiff(int year, int month, int weekStart) {
         return getMonthEndDiff(year, month, getMonthDaysCount(year, month), weekStart);
     }
-    
+
     /**
      * DAY_OF_WEEK return  1  2  3 	4  5  6	 7，偏移了一位
      * 获取日期月份对应的结束偏移量,用于计算两个年份之间总共有多少周，不用于MonthView
