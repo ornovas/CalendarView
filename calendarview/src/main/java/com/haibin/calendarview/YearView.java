@@ -247,8 +247,8 @@ public abstract class YearView extends View {
         updateStyle();
     }
 
-    final void updateStyle(){
-        if(mDelegate == null){
+    final void updateStyle() {
+        if (mDelegate == null) {
             return;
         }
         this.mCurMonthTextPaint.setTextSize(mDelegate.getYearViewDayTextSize());
@@ -280,7 +280,7 @@ public abstract class YearView extends View {
         mNextDiff = CalendarUtil.getMonthEndDiff(mYear, mMonth, mDelegate.getWeekStart());
         int preDiff = CalendarUtil.getMonthViewStartDiff(mYear, mMonth, mDelegate.getWeekStart());
 
-        mItems = CalendarUtil.initCalendarForMonthView(mYear, mMonth, mDelegate.getCurrentDay(), mDelegate.getWeekStart());
+        mItems = CalendarUtil.initCalendarForMonthView(mYear, mMonth, mDelegate.getCurrentDay(), mDelegate.getWeekStart(), false);
 
         mLineCount = 6;
         addSchemesFromMap();
@@ -331,7 +331,7 @@ public abstract class YearView extends View {
         for (Calendar a : mItems) {
             if (mDelegate.mSchemeDatesMap.containsKey(a.toString())) {
                 Calendar d = mDelegate.mSchemeDatesMap.get(a.toString());
-                if(d == null){
+                if (d == null) {
                     continue;
                 }
                 a.setScheme(TextUtils.isEmpty(d.getScheme()) ? mDelegate.getSchemeText() : d.getScheme());

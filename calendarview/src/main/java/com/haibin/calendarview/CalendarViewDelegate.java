@@ -91,6 +91,11 @@ public class CalendarViewDelegate {
      */
     public int mMonthViewShowMode;
 
+    /**
+     * 如果当前的月份, 包含今天, 那么强制将今天所在的周显示在视图底部,
+     * 并向上额外显示30天
+     */
+    public boolean monthPriorityShowWeekMode = false;
 
     /**
      * 默认选择模式
@@ -470,6 +475,7 @@ public class CalendarViewDelegate {
                 FIRST_DAY_OF_MONTH);
 
         mMonthViewShowMode = array.getInt(R.styleable.CalendarView_month_view_show_mode, MODE_ALL_MONTH);
+        monthPriorityShowWeekMode = array.getBoolean(R.styleable.CalendarView_month_priority_show_week_mode, monthPriorityShowWeekMode);
         mWeekStart = array.getInt(R.styleable.CalendarView_week_start_with, WEEK_START_WITH_SUN);
         mSelectMode = array.getInt(R.styleable.CalendarView_select_mode, SELECT_MODE_DEFAULT);
         mMaxMultiSelectSize = array.getInt(R.styleable.CalendarView_max_multi_select_size, Integer.MAX_VALUE);
