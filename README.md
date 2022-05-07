@@ -29,9 +29,9 @@
  ---      | ---
 ![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_month_anim.gif)|![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_week_anim.gif)
 
-按下效果 | ---
+按下效果 | 其它月份预览
  ---    | ---
-![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_touch_down.gif) | ---
+![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/gif_touch_down.gif) | ![](https://raw.githubusercontent.com/angcyo/CalendarView/master/png/mark_month_view.png)
 
 # 使用方式如下:
 
