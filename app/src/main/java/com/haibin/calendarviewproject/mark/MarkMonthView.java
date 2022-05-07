@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.haibin.calendarview.Calendar;
+import com.haibin.calendarview.CalendarUtil;
 import com.haibin.calendarview.MonthView;
 import com.haibin.calendarviewproject.R;
 
@@ -38,16 +39,26 @@ public class MarkMonthView extends MonthView {
     protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
         float cx = x + mItemWidth / 2f;
         float cy = y + mItemHeight / 2f + markProperty.getOffset();
-        if (!calendar.isCurrentMonth()) {
+
+        if (!calendar.isCurrentMonth() || !isInPriorityShowWeekMode(calendar)) {
             mSchemePaint.setColor(markProperty.otherMonthSchemeColor);
         }
+
         canvas.drawCircle(cx, cy, markProperty.schemeRadius, mSchemePaint);
+    }
+
+    boolean isInPriorityShowWeekMode(Calendar calendar) {
+        long distance = CalendarUtil.distance(CalendarUtil.currentCalendar(), calendar);
+        return mDelegate.monthPriorityShowWeekMode && distance > 0 &&
+                distance < CalendarUtil.MONTH_PRIORITY_DAY;
     }
 
     @Override
     protected void onDrawText(Canvas canvas, Calendar calendar, int x, int y, boolean hasScheme, boolean isSelected) {
         float baselineY = mTextBaseLine + y + markProperty.getOffset();
         float cx = x + mItemWidth / 2f;
+
+        boolean isInPriorityShowWeekMode = isInPriorityShowWeekMode(calendar);
 
         Paint paint;
         if (hasScheme || isSelected) {
@@ -57,10 +68,20 @@ public class MarkMonthView extends MonthView {
             } else {
                 paint.setColor(markProperty.otherMonthSchemeTextColor);
             }
-        } else if (calendar.isCurrentMonth()) {
-            paint = mCurMonthTextPaint;
         } else {
-            paint = mOtherMonthTextPaint;
+            if (mDelegate.monthPriorityShowWeekMode) {
+                if (isInPriorityShowWeekMode) {
+                    paint = mCurMonthTextPaint;
+                } else {
+                    paint = mOtherMonthTextPaint;
+                }
+            } else {
+                if (calendar.isCurrentMonth()) {
+                    paint = mCurMonthTextPaint;
+                } else {
+                    paint = mOtherMonthTextPaint;
+                }
+            }
         }
 
         canvas.drawText(String.valueOf(calendar.getDay()),
