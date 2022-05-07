@@ -49,7 +49,7 @@ allprojects {
 ## 加入依赖
 
 ```
-implementation 'com.github.angcyo:CalendarView:3.7.1.27'
+implementation 'com.github.angcyo:CalendarView:3.7.1.29'
 ```
 
 ### `垂直滚动日历`使用方式
