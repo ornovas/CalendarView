@@ -84,6 +84,8 @@
         <attr name="month_priority_show_week_mode" format="boolean" />
         <attr name="week_string_id" format="reference" />
         <attr name="month_string_id" format="reference" />
+        <!--预览的日期, 请使用tools标签, tools:preview_calendar-->
+        <attr name="preview_calendar" format="string" />
 
         <!-- 月份显示模式 -->
         <attr name="month_view_show_mode">

@@ -84,18 +84,18 @@ public abstract class BaseMonthView extends BaseView {
 
         int preDiff;
         int monthDayCount;
-        boolean isCurrentMonth = CalendarUtil.isCurrentMonth(mYear, mMonth);
+        boolean isCurrentMonth = CalendarUtil.isCurrentMonth(mDelegate, mYear, mMonth);
         boolean priorityWeekMode = mDelegate.monthPriorityShowWeekMode && isCurrentMonth;
         if (priorityWeekMode) {
-            mNextDiff = CalendarUtil.getMonthCurrentDayEndDiff(mYear, mMonth, mDelegate.getWeekStart());
-            preDiff = CalendarUtil.getMonthCurrentDayStartDiff(mYear, mMonth, mDelegate.getWeekStart());
-            monthDayCount = CalendarUtil.currentCalendar().getDay();
+            mNextDiff = CalendarUtil.getMonthCurrentDayEndDiff(mDelegate, mYear, mMonth, mDelegate.getWeekStart());
+            preDiff = CalendarUtil.getMonthCurrentDayStartDiff(mDelegate, mYear, mMonth, mDelegate.getWeekStart());
+            monthDayCount = mDelegate.mCurrentDate.getDay();
         } else {
-            mNextDiff = CalendarUtil.getMonthEndDiff(mYear, mMonth, mDelegate.getWeekStart());
+            mNextDiff = CalendarUtil.getMonthEndDiff(mDelegate, mYear, mMonth, mDelegate.getWeekStart());
             preDiff = CalendarUtil.getMonthViewStartDiff(mYear, mMonth, mDelegate.getWeekStart());
             monthDayCount = CalendarUtil.getMonthDaysCount(mYear, mMonth);
         }
-        mItems = CalendarUtil.initCalendarForMonthView(mYear, mMonth, mDelegate.getCurrentDay(), mDelegate.getWeekStart(), priorityWeekMode);
+        mItems = CalendarUtil.initCalendarForMonthView(mDelegate, mYear, mMonth, mDelegate.getCurrentDay(), mDelegate.getWeekStart(), priorityWeekMode);
 
         if (mItems.contains(mDelegate.getCurrentDay())) {
             mCurrentItem = mItems.indexOf(mDelegate.getCurrentDay());

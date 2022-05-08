@@ -23,6 +23,8 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -320,7 +322,6 @@ public class CalendarViewDelegate {
      */
     public Calendar mCurrentDate;
 
-
     private boolean mMonthViewScrollable,
             mWeekViewScrollable,
             mYearViewScrollable;
@@ -444,6 +445,12 @@ public class CalendarViewDelegate {
      */
     public int monthStringResId = R.array.week_string_array;
 
+    /**
+     * 预览的日期, 格式必须是yyyyMMdd.
+     * 请使用`tools:preview_calendar`
+     */
+    public String previewCalendar = null;
+
     CalendarViewDelegate(Context context, @Nullable AttributeSet attrs) {
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CalendarView);
 
@@ -553,6 +560,7 @@ public class CalendarViewDelegate {
 
         weekStringResId = array.getResourceId(R.styleable.CalendarView_week_string_id, weekStringResId);
         monthStringResId = array.getResourceId(R.styleable.CalendarView_month_string_id, monthStringResId);
+        previewCalendar = array.getString(R.styleable.CalendarView_preview_calendar);
 
         if (mYearViewPadding != 0) {
             mYearViewPaddingLeft = mYearViewPadding;
@@ -578,6 +586,15 @@ public class CalendarViewDelegate {
     protected void init() {
         mCurrentDate = new Calendar();
         Date d = new Date();
+        if (!TextUtils.isEmpty(previewCalendar)) {
+            SimpleDateFormat format = (SimpleDateFormat) SimpleDateFormat.getInstance();
+            format.applyPattern("yyyyMMdd");
+            try {
+                d = format.parse(previewCalendar);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
         mCurrentDate.setYear(CalendarUtil.getDate("yyyy", d));
         mCurrentDate.setMonth(CalendarUtil.getDate("MM", d));
         mCurrentDate.setDay(CalendarUtil.getDate("dd", d));

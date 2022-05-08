@@ -165,7 +165,6 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
         return isCurrentMonth;
     }
 
-
     public void setCurrentMonth(boolean currentMonth) {
         this.isCurrentMonth = currentMonth;
     }
@@ -178,7 +177,6 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
         isCurrentDay = currentDay;
     }
 
-
     public String getLunar() {
         return lunar;
     }
@@ -187,16 +185,13 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
         this.lunar = lunar;
     }
 
-
     public String getScheme() {
         return scheme;
     }
 
-
     public void setScheme(String scheme) {
         this.scheme = scheme;
     }
-
 
     public int getSchemeColor() {
         return schemeColor;
@@ -206,7 +201,6 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
         this.schemeColor = schemeColor;
     }
 
-
     public List<Scheme> getSchemes() {
         return schemes;
     }
@@ -214,7 +208,6 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
     public void setSchemes(List<Scheme> schemes) {
         this.schemes = schemes;
     }
-
 
     public void addScheme(Scheme scheme) {
         if (schemes == null) {
@@ -290,7 +283,6 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
     public void setGregorianFestival(String gregorianFestival) {
         this.gregorianFestival = gregorianFestival;
     }
-
 
     public int getLeapMonth() {
         return leapMonth;
@@ -374,11 +366,15 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
      * @return getTimeInMillis
      */
     public long getTimeInMillis() {
+        return toCalendar().getTimeInMillis();
+    }
+
+    public java.util.Calendar toCalendar() {
         java.util.Calendar calendar = java.util.Calendar.getInstance();
         calendar.set(java.util.Calendar.YEAR, year);
         calendar.set(java.util.Calendar.MONTH, month - 1);
         calendar.set(java.util.Calendar.DAY_OF_MONTH, day);
-        return calendar.getTimeInMillis();
+        return calendar;
     }
 
     @Override

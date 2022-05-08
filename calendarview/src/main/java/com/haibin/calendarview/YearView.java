@@ -277,10 +277,10 @@ public abstract class YearView extends View {
     final void init(int year, int month) {
         mYear = year;
         mMonth = month;
-        mNextDiff = CalendarUtil.getMonthEndDiff(mYear, mMonth, mDelegate.getWeekStart());
+        mNextDiff = CalendarUtil.getMonthEndDiff(null, mYear, mMonth, mDelegate.getWeekStart());
         int preDiff = CalendarUtil.getMonthViewStartDiff(mYear, mMonth, mDelegate.getWeekStart());
 
-        mItems = CalendarUtil.initCalendarForMonthView(mYear, mMonth, mDelegate.getCurrentDay(), mDelegate.getWeekStart(), false);
+        mItems = CalendarUtil.initCalendarForMonthView(mDelegate, mYear, mMonth, mDelegate.getCurrentDay(), mDelegate.getWeekStart(), false);
 
         mLineCount = 6;
         addSchemesFromMap();
