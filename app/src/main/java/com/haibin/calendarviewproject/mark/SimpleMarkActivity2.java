@@ -71,6 +71,17 @@ public class SimpleMarkActivity2 extends AppCompatActivity {
         //
         findViewById(R.id.fl_current).setOnClickListener(v -> mCalendarView.scrollToCurrent());
 
+        mCalendarView.setOnCalendarInterceptListener(new CalendarView.OnCalendarInterceptListener() {
+            @Override
+            public boolean onCalendarIntercept(Calendar calendar) {
+                return true;
+            }
+
+            @Override
+            public void onCalendarInterceptClick(Calendar calendar, boolean isClick) {
+                //no
+            }
+        });
         mCalendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
             @Override
             public void onCalendarOutOfRange(Calendar calendar) {

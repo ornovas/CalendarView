@@ -79,6 +79,7 @@
         app:other_month_text_color="#848897"
         app:scheme_text_color="#fff"
         app:scheme_theme_color="#457bf7"
+        app:select_mode="single_mode"
         app:selected_text_color="#fff"
         app:selected_theme_color="#457bf7"
         app:week_background="#E8E8E8"
