@@ -88,7 +88,7 @@ public class MarkProperty implements IDrawBaseView {
     }
 
     boolean isInPriorityShowWeekMode(BaseView baseView, Calendar calendar) {
-        long distance = CalendarUtil.distance(CalendarUtil.currentCalendar(), calendar);
+        long distance = CalendarUtil.distance(baseView.mDelegate.mCurrentDate, calendar);
         return baseView.mDelegate.monthPriorityShowWeekMode && distance >= 0 &&
                 distance < CalendarUtil.MONTH_PRIORITY_DAY;
     }
