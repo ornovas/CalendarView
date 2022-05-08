@@ -913,4 +913,29 @@ public final class CalendarUtil {
         long t2 = min.getTimeInMillis();
         return (t1 - t2) / ONE_DAY;
     }
+
+    /**
+     * 获取今天开始的前多少天的日历(包含今天)
+     */
+    public static List<Calendar> getBeforeCalendarList(int day) {
+        List<Calendar> result = new ArrayList<>();
+        java.util.Calendar current = java.util.Calendar.getInstance();
+
+        for (int i = 0; i < day; i++) {
+            if (i > 0) {
+                current.add(java.util.Calendar.DAY_OF_MONTH, -1);
+            }
+
+            Calendar calendar = new Calendar();
+            calendar.setYear(current.get(java.util.Calendar.YEAR));
+            calendar.setMonth(current.get(java.util.Calendar.MONTH) + 1);
+            calendar.setDay(current.get(java.util.Calendar.DAY_OF_MONTH));
+            calendar.setCurrentDay(i == 0);
+            LunarCalendar.setupLunarCalendar(calendar);
+
+            result.add(calendar);
+        }
+
+        return result;
+    }
 }

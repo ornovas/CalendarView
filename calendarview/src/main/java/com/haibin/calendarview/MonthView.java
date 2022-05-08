@@ -142,6 +142,7 @@ public abstract class MonthView extends BaseMonthView {
     @Override
     public void onClick(View v) {
         if (!isClick) {
+            isClick = true;
             return;
         }
         Calendar calendar = getIndex();
@@ -171,11 +172,15 @@ public abstract class MonthView extends BaseMonthView {
         int clickIndex = mItems.indexOf(calendar);
         int oldItem = mCurrentItem;
         mCurrentItem = clickIndex;
-        if (calendar.isCurrentMonth() && oldItem != -1 && oldItem != mCurrentItem) {
+
+        if (!mDelegate.isMonthViewScrollable() && clickIndex != -1) {
+            //不可以滚动的情况下, 需要动画
+            onChangeItemTo(oldItem, mCurrentItem);
+        } else if (calendar.isCurrentMonth() && oldItem != -1 && oldItem != mCurrentItem) {
             onChangeItemTo(oldItem, mCurrentItem);
         }
 
-        if (!calendar.isCurrentMonth() && mMonthViewPager != null) {
+        if (!calendar.isCurrentMonth() && mMonthViewPager != null && mDelegate.isMonthViewScrollable()) {
             int cur = mMonthViewPager.getCurrentItem();
             int clickMonth = calendar.getMonth();
             int position;
@@ -240,7 +245,6 @@ public abstract class MonthView extends BaseMonthView {
             return true;
         }
 
-
         mCurrentItem = mItems.indexOf(calendar);
 
         if (!calendar.isCurrentMonth() && mMonthViewPager != null) {
@@ -259,7 +263,6 @@ public abstract class MonthView extends BaseMonthView {
             } else {
                 mParentLayout.updateSelectWeek(CalendarUtil.getWeekFromDayInMonth(calendar, mDelegate.getWeekStart()));
             }
-
         }
 
         if (mDelegate.mCalendarSelectListener != null) {

@@ -37,7 +37,7 @@ import java.util.List;
 
 public abstract class BaseView extends View implements View.OnClickListener, View.OnLongClickListener {
 
-    protected CalendarViewDelegate mDelegate;
+    public CalendarViewDelegate mDelegate;
 
     /**
      * 当前月份日期的笔
@@ -47,57 +47,57 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     /**
      * 其它月份日期颜色
      */
-    protected Paint mOtherMonthTextPaint = new Paint();
+    public Paint mOtherMonthTextPaint = new Paint();
 
     /**
      * 当前月份农历文本颜色
      */
-    protected Paint mCurMonthLunarTextPaint = new Paint();
+    public Paint mCurMonthLunarTextPaint = new Paint();
 
     /**
      * 当前月份农历文本颜色
      */
-    protected Paint mSelectedLunarTextPaint = new Paint();
+    public Paint mSelectedLunarTextPaint = new Paint();
 
     /**
      * 其它月份农历文本颜色
      */
-    protected Paint mOtherMonthLunarTextPaint = new Paint();
+    public Paint mOtherMonthLunarTextPaint = new Paint();
 
     /**
      * 其它月份农历文本颜色
      */
-    protected Paint mSchemeLunarTextPaint = new Paint();
+    public Paint mSchemeLunarTextPaint = new Paint();
 
     /**
      * 标记的日期背景颜色画笔
      */
-    protected Paint mSchemePaint = new Paint();
+    public Paint mSchemePaint = new Paint();
 
     /**
      * 被选择的日期背景色
      */
-    protected Paint mSelectedPaint = new Paint();
+    public Paint mSelectedPaint = new Paint();
 
     /**
      * 标记的文本画笔
      */
-    protected Paint mSchemeTextPaint = new Paint();
+    public Paint mSchemeTextPaint = new Paint();
 
     /**
      * 选中的文本画笔
      */
-    protected Paint mSelectTextPaint = new Paint();
+    public Paint mSelectTextPaint = new Paint();
 
     /**
      * 当前日期文本颜色画笔
      */
-    protected Paint mCurDayTextPaint = new Paint();
+    public Paint mCurDayTextPaint = new Paint();
 
     /**
      * 当前日期文本颜色画笔
      */
-    protected Paint mCurDayLunarTextPaint = new Paint();
+    public Paint mCurDayLunarTextPaint = new Paint();
 
     /**
      * 日历布局，需要在日历下方放自己的布局
@@ -122,7 +122,7 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     /**
      * Text的基线
      */
-    protected float mTextBaseLine;
+    public float mTextBaseLine;
 
     /**
      * 点击的x、y坐标
@@ -134,7 +134,9 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
      */
     boolean isClick = true;
 
-    /**手势是否按下*/
+    /**
+     * 手势是否按下
+     */
     protected boolean isTouchDown = false;
 
     /**
