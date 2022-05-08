@@ -434,6 +434,16 @@ public class CalendarViewDelegate {
      */
     boolean showYearView = false;
 
+    /**
+     * 星期资源文本id
+     */
+    public int weekStringResId = R.array.week_string_array;
+
+    /**
+     * 月份资源文本id
+     */
+    public int monthStringResId = R.array.week_string_array;
+
     CalendarViewDelegate(Context context, @Nullable AttributeSet attrs) {
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CalendarView);
 
@@ -540,6 +550,9 @@ public class CalendarViewDelegate {
         mYearViewPaddingRight = (int) array.getDimension(R.styleable.CalendarView_year_view_padding_right,
                 CalendarUtil.dipToPx(context, 12));
         showYearView = array.getBoolean(R.styleable.CalendarView_year_view_show, showYearView);
+
+        weekStringResId = array.getResourceId(R.styleable.CalendarView_week_string_id, weekStringResId);
+        monthStringResId = array.getResourceId(R.styleable.CalendarView_month_string_id, monthStringResId);
 
         if (mYearViewPadding != 0) {
             mYearViewPaddingLeft = mYearViewPadding;

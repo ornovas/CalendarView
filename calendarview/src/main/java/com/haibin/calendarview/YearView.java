@@ -35,7 +35,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public abstract class YearView extends View {
 
-    CalendarViewDelegate mDelegate;
+    protected CalendarViewDelegate mDelegate;
 
     /**
      * 当前月份日期的笔
