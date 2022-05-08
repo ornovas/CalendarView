@@ -161,7 +161,6 @@ public abstract class MonthView extends BaseMonthView {
             return;
         }
 
-
         if (!isInRange(calendar)) {
             if (mDelegate.mCalendarSelectListener != null) {
                 mDelegate.mCalendarSelectListener.onCalendarOutOfRange(calendar);

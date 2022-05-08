@@ -186,8 +186,10 @@ public abstract class BaseMonthView extends BaseView {
      */
     final void setSelectedCalendar(Calendar calendar) {
         mCurrentItem = mItems.indexOf(calendar);
+        if (onCalendarIntercept(calendar)) {
+            mCurrentItem = -1;
+        }
     }
-
 
     /**
      * 更新显示模式

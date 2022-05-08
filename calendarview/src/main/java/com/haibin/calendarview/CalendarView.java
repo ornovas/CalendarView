@@ -1908,8 +1908,15 @@ public class CalendarView extends FrameLayout {
      * 拦截日期是否可用事件
      */
     public interface OnCalendarInterceptListener {
+
+        /**
+         * 返回是否要拦截当前的日期
+         */
         boolean onCalendarIntercept(Calendar calendar);
 
+        /**
+         * 如果被拦截了, 则回调此方法
+         */
         void onCalendarInterceptClick(Calendar calendar, boolean isClick);
     }
 
@@ -1933,8 +1940,8 @@ public class CalendarView extends FrameLayout {
     /**
      * 2021-10-20
      * class 对象创建时的初始化监听
-     * */
-    public interface OnClassInitializeListener{
+     */
+    public interface OnClassInitializeListener {
         void onClassInitialize(Class<?> cls, View view);
     }
 
@@ -1942,7 +1949,7 @@ public class CalendarView extends FrameLayout {
         this.mDelegate.mClassInitializeListener = listener;
     }
 
-    public interface OnVerticalItemInitializeListener{
+    public interface OnVerticalItemInitializeListener {
         void onVerticalItemInitialize(VerticalMonthRecyclerView.VerticalMonthViewHolder viewHolder, int position, int year, int month);
     }
 

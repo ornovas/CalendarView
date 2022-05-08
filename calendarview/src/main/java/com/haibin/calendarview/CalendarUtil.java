@@ -911,7 +911,7 @@ public final class CalendarUtil {
     public static long distance(Calendar max, Calendar min) {
         long t1 = max.getTimeInMillis();
         long t2 = min.getTimeInMillis();
-        return (t1 - t2) / ONE_DAY;
+        return (long) Math.floor((t1 - t2) * 1f / ONE_DAY);
     }
 
     /**
