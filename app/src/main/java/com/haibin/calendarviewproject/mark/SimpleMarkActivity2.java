@@ -68,6 +68,12 @@ public class SimpleMarkActivity2 extends AppCompatActivity {
         mCalendarView.addSchemeDate(schemeList.get(schemeList.size() - 5));
         mCalendarView.addSchemeDate(schemeList.get(schemeList.size() - 7));
 
+        Calendar calendar = new Calendar();
+        calendar.setYear(2022);
+        calendar.setMonth(5);
+        calendar.setDay(5);
+        mCalendarView.addSchemeDate(calendar);
+
         //
         findViewById(R.id.fl_current).setOnClickListener(v -> mCalendarView.scrollToCurrent());
 
