@@ -281,7 +281,7 @@ public final class CalendarUtil {
                 date.get(java.util.Calendar.MONTH) + 1,
                 date.get(java.util.Calendar.DAY_OF_MONTH),
                 weekStart);
-        return diff1 + diffDay;
+        return diff1 + diffDay + 1;
     }
 
     /**
