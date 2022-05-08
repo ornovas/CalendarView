@@ -80,12 +80,13 @@ public class SimpleMarkActivity2 extends AppCompatActivity {
         mCalendarView.setOnCalendarInterceptListener(new CalendarView.OnCalendarInterceptListener() {
             @Override
             public boolean onCalendarIntercept(Calendar calendar) {
+                //拦截选中当前日期
                 return true;
             }
 
             @Override
             public void onCalendarInterceptClick(Calendar calendar, boolean isClick) {
-                //no
+                //拦截后的日期回调
             }
         });
         mCalendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
@@ -96,6 +97,7 @@ public class SimpleMarkActivity2 extends AppCompatActivity {
 
             @Override
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
+                //选中日期的回调, 如果被拦截不会触发
                 Log.i("angcyo", "onCalendarSelect " + calendar + " " + isClick);
                 if (isClick) {
                     String text = calendar.getMonth() + "月" + calendar.getDay() + "日";
