@@ -22,6 +22,7 @@ import com.haibin.calendarviewproject.custom.CustomActivity;
 import com.haibin.calendarviewproject.full.FullActivity;
 import com.haibin.calendarviewproject.index.IndexActivity;
 import com.haibin.calendarviewproject.mark.SimpleMarkActivity;
+import com.haibin.calendarviewproject.mark.SimpleMarkActivity2;
 import com.haibin.calendarviewproject.meizu.MeiZuActivity;
 import com.haibin.calendarviewproject.meizu.MeiZuMonthView;
 import com.haibin.calendarviewproject.meizu.MeizuWeekView;
@@ -283,6 +284,7 @@ public class MainActivity extends BaseActivity implements
         findViewById(R.id.ll_full).setOnClickListener(this);
         findViewById(R.id.ll_vertical).setOnClickListener(this);
         findViewById(R.id.ll_simple_mark).setOnClickListener(this);
+        findViewById(R.id.ll_simple_mark2).setOnClickListener(this);
     }
 
     @Override
@@ -369,6 +371,9 @@ public class MainActivity extends BaseActivity implements
                 break;
             case R.id.ll_simple_mark:
                 SimpleMarkActivity.show(this);
+                break;
+            case R.id.ll_simple_mark2:
+                SimpleMarkActivity2.show(this);
                 break;
         }
     }

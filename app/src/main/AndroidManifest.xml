@@ -74,6 +74,9 @@
         <activity
             android:name=".mark.SimpleMarkActivity"
             android:exported="true" />
+        <activity
+            android:name=".mark.SimpleMarkActivity2"
+            android:exported="true" />
     </application>
 
 </manifest>
