@@ -14,7 +14,7 @@
         android:id="@+id/rl_tool"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="@color/colorPrimary">
+        android:background="#E8E8E8">
 
         <TextView
             android:id="@+id/tv_month_day"
@@ -64,7 +64,7 @@
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
+        android:background="#E8E8E8"
         app:calendar_height="50dp"
         app:calendar_padding="0dp"
         app:current_day_text_color="#06AD95"
@@ -80,6 +80,7 @@
         app:scheme_theme_color="#457bf7"
         app:selected_text_color="#fff"
         app:selected_theme_color="#457bf7"
+        app:week_background="#E8E8E8"
         app:week_start_with="mon"
         app:week_text_color="#484848"
         app:week_text_size="14dp"
