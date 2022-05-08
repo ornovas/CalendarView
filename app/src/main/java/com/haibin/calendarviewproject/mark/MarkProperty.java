@@ -11,7 +11,6 @@ import com.haibin.calendarview.BaseView;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarUtil;
 import com.haibin.calendarview.IDrawBaseView;
-import com.haibin.calendarviewproject.R;
 
 /**
  * @author <a href="mailto:angcyo@126.com">angcyo</a>
@@ -158,7 +157,7 @@ public class MarkProperty implements IDrawBaseView {
         if (drawMonthText) {
             if (calendar.getDrawIndex() == 0 || calendar.getDay() == 1) {
                 String monthText = baseView.getResources()
-                        .getStringArray(R.array.month_string_array)[calendar.getMonth() - 1];
+                        .getStringArray(baseView.mDelegate.monthStringResId)[calendar.getMonth() - 1];
                 if (calendar.isCurrentMonth()) {
                     monthTextPaint.setColor(baseView.mCurMonthTextPaint.getColor());
                 } else {
