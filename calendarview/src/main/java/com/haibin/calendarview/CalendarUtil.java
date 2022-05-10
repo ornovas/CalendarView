@@ -281,12 +281,12 @@ public final class CalendarUtil {
             date = delegate.mCurrentDate.toCalendar();
         }
 
-        date.add(java.util.Calendar.DAY_OF_MONTH, -interval); //在当前日期上减30天
+        date.add(java.util.Calendar.DAY_OF_MONTH, -(interval - 1)); //在当前日期上减29天, 包含今天就是30天了
         int diff1 = getMonthViewStartDiff(date.get(java.util.Calendar.YEAR),
                 date.get(java.util.Calendar.MONTH) + 1,
                 date.get(java.util.Calendar.DAY_OF_MONTH),
                 weekStart);
-        return diff1 + diffDay + 1;
+        return diff1 + diffDay;
     }
 
     /**
