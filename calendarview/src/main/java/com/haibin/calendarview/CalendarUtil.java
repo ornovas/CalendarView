@@ -924,21 +924,35 @@ public final class CalendarUtil {
         return (long) Math.ceil((t1 - t2) * 1f / ONE_DAY);
     }
 
+    public static List<Calendar> getBeforeCalendarList(int day) {
+        return getBeforeCalendarList(day, Integer.MAX_VALUE);
+    }
+
     /**
      * 获取今天开始的前多少天的日历(包含今天)
+     *
+     * @param day       需要获取的前多少天
+     * @param monthDiff 支持跨越的月份
      */
-    public static List<Calendar> getBeforeCalendarList(int day) {
+    public static List<Calendar> getBeforeCalendarList(int day, int monthDiff) {
         List<Calendar> result = new ArrayList<>();
         java.util.Calendar current = java.util.Calendar.getInstance();
+        int currentMonth = current.get(java.util.Calendar.MONTH);
 
         for (int i = 0; i < day; i++) {
             if (i > 0) {
                 current.add(java.util.Calendar.DAY_OF_MONTH, -1);
             }
 
+            int month = current.get(java.util.Calendar.MONTH);
+            if (currentMonth - month > monthDiff) {
+                //跨越了很多个月, 则直接返回
+                break;
+            }
+
             Calendar calendar = new Calendar();
             calendar.setYear(current.get(java.util.Calendar.YEAR));
-            calendar.setMonth(current.get(java.util.Calendar.MONTH) + 1);
+            calendar.setMonth(month + 1);
             calendar.setDay(current.get(java.util.Calendar.DAY_OF_MONTH));
             calendar.setCurrentDay(i == 0);
             LunarCalendar.setupLunarCalendar(calendar);
