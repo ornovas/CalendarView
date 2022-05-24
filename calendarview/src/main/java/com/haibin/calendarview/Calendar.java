@@ -377,6 +377,14 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
         return calendar;
     }
 
+    public static Calendar fromCalendar(java.util.Calendar calendar) {
+        Calendar result = new Calendar();
+        result.setYear(calendar.get(java.util.Calendar.YEAR));
+        result.setMonth(calendar.get(java.util.Calendar.MONTH) + 1);
+        result.setDay(calendar.get(java.util.Calendar.DAY_OF_MONTH));
+        return result;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o != null && o instanceof Calendar) {
