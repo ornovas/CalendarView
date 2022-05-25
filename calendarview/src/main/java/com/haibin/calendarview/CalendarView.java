@@ -1681,6 +1681,13 @@ public class CalendarView extends FrameLayout {
     }
 
     /**
+     * 获取当前月份的行数
+     */
+    public int getCurrentMonthLines() {
+        return mMonthPager.getCurrentMonthLines();
+    }
+
+    /**
      * 获取选择的日期
      *
      * @return 获取选择的日期

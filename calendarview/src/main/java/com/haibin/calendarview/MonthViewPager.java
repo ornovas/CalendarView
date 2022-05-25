@@ -418,6 +418,17 @@ public final class MonthViewPager extends ViewPager {
     }
 
     /**
+     * 获取当前月份的行数
+     */
+    int getCurrentMonthLines() {
+        BaseMonthView view = findViewWithTag(getCurrentItem());
+        if (view == null) {
+            return -1;
+        }
+        return view.mLineCount;
+    }
+
+    /**
      * 更新为默认选择模式
      */
     void updateDefaultSelect() {
