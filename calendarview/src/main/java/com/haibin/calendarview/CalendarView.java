@@ -304,6 +304,9 @@ public class CalendarView extends FrameLayout {
         return mDelegate.getCurrentDay().getYear();
     }
 
+    public CalendarViewDelegate getDelegate() {
+        return mDelegate;
+    }
 
     /**
      * 打开日历年月份快速选择
