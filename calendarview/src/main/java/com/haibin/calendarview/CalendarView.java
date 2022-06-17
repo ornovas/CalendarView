@@ -1684,6 +1684,26 @@ public class CalendarView extends FrameLayout {
     }
 
     /**
+     * 获取当前月份包含的Scheme信息
+     *
+     * @return return
+     */
+    public List<Calendar> getCurrentMonthSchemeCalendars() {
+        List<Calendar> result = new ArrayList<>();
+        Map<String, Calendar> map = getDelegate().mSchemeDatesMap;
+        if (map != null) {
+            List<Calendar> calendars = getCurrentMonthCalendars();
+            for (Calendar calendar : calendars) {
+                Calendar scheme = map.get(calendar.toString());
+                if (scheme != null) {
+                    result.add(scheme);
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
      * 获取当前月份的行数
      */
     public int getCurrentMonthLines() {
