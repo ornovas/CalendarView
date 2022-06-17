@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.haibin.calendarview.BaseMonthView;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarUtil;
 import com.haibin.calendarview.CalendarView;
@@ -73,6 +74,15 @@ public class SimpleMarkActivity2 extends AppCompatActivity {
         calendar.setMonth(5);
         calendar.setDay(5);
         mCalendarView.addSchemeDate(calendar);
+
+        mCalendarView.post(new Runnable() {
+            @Override
+            public void run() {
+                BaseMonthView monthView = mCalendarView.getMonthViewPager().findViewWithTag(mCalendarView.getMonthViewPager().getCurrentItem());
+                List<Calendar> list = mCalendarView.getCurrentMonthCalendars();
+                monthView.getMeasuredHeight();
+            }
+        });
 
         //
         findViewById(R.id.fl_current).setOnClickListener(v -> mCalendarView.scrollToCurrent());
