@@ -28,7 +28,9 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 基本的日历View，派生出MonthView 和 WeekView
@@ -475,4 +477,27 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     protected void initPaint() {
 
     }
+
+    /**
+     * 获取当前视图包含的Scheme信息
+     *
+     * @return return
+     */
+    public List<Calendar> getCurrentSchemeCalendars() {
+        List<Calendar> result = new ArrayList<>();
+        if (mDelegate != null) {
+            Map<String, Calendar> map = mDelegate.mSchemeDatesMap;
+            List<Calendar> calendars = mItems;
+            if (map != null && calendars != null) {
+                for (Calendar calendar : calendars) {
+                    Calendar scheme = map.get(calendar.toString());
+                    if (scheme != null) {
+                        result.add(scheme);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
 }

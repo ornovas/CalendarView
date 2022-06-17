@@ -417,6 +417,10 @@ public final class MonthViewPager extends ViewPager {
         return view.mItems;
     }
 
+    public BaseMonthView getCurrentMonthView() {
+        return findViewWithTag(getCurrentItem());
+    }
+
     /**
      * 获取当前月份的行数
      */

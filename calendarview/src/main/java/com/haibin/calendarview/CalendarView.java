@@ -1689,18 +1689,13 @@ public class CalendarView extends FrameLayout {
      * @return return
      */
     public List<Calendar> getCurrentMonthSchemeCalendars() {
-        List<Calendar> result = new ArrayList<>();
-        Map<String, Calendar> map = getDelegate().mSchemeDatesMap;
-        if (map != null) {
-            List<Calendar> calendars = getCurrentMonthCalendars();
-            for (Calendar calendar : calendars) {
-                Calendar scheme = map.get(calendar.toString());
-                if (scheme != null) {
-                    result.add(scheme);
-                }
+        if (mMonthPager != null) {
+            BaseMonthView monthView = mMonthPager.getCurrentMonthView();
+            if (monthView != null) {
+                return monthView.getCurrentSchemeCalendars();
             }
         }
-        return result;
+        return null;
     }
 
     /**
