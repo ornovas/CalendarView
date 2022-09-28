@@ -5,6 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.text.TextPaint;
 
 import com.haibin.calendarview.BaseView;
@@ -55,10 +58,41 @@ public class MarkProperty implements IDrawBaseView {
 
     RectF lineRect = new RectF();
 
+    /**
+     * 主要的渐变背景
+     */
+    GradientDrawable primaryDrawable;
+
+    /**
+     * 次要的渐变背景
+     */
+    GradientDrawable secondDrawable;
+
     public MarkProperty() {
         monthTextPaint.setAntiAlias(true);
         monthTextPaint.setStyle(Paint.Style.FILL);
         monthTextPaint.setTextAlign(Paint.Align.CENTER);
+
+        primaryDrawable = new GradientDrawable();
+        primaryDrawable.setShape(GradientDrawable.OVAL);
+        //primaryDrawable.setCornerRadius();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            primaryDrawable.setOrientation(GradientDrawable.Orientation.TOP_BOTTOM);
+            primaryDrawable.setColors(new int[]{
+                    Color.parseColor("#21C5F5"),
+                    Color.parseColor("#0097FF")
+            });
+        }
+
+        secondDrawable = new GradientDrawable();
+        secondDrawable.setShape(GradientDrawable.OVAL);
+        //secondDrawable.setCornerRadius();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            secondDrawable.setOrientation(GradientDrawable.Orientation.TOP_BOTTOM);
+            secondDrawable.setColors(new int[]{
+                    Color.parseColor("#6621C5F5"),
+                    Color.parseColor("#660097FF")});
+        }
     }
 
     void onPreviewHook(BaseView baseView) {
@@ -106,15 +140,28 @@ public class MarkProperty implements IDrawBaseView {
         float cx = x + baseView.mItemWidth / 2f;
         float cy = y + baseView.mItemHeight / 2f + getOffset();
 
+        Drawable drawDrawable = primaryDrawable;
+
         if (baseView.mDelegate.monthPriorityShowWeekMode) {
             if (!isInPriorityShowWeekMode(baseView, calendar)) {
                 baseView.mSchemePaint.setColor(otherMonthSchemeColor);
+                drawDrawable = secondDrawable;
             }
         } else if (!calendar.isCurrentMonth()) {
             baseView.mSchemePaint.setColor(otherMonthSchemeColor);
+            drawDrawable = secondDrawable;
         }
 
-        canvas.drawCircle(cx, cy, schemeRadius, baseView.mSchemePaint);
+        if (drawDrawable == null) {
+            canvas.drawCircle(cx, cy, schemeRadius, baseView.mSchemePaint);
+        } else {
+            int left = (int) (cx - schemeRadius);
+            int top = (int) (cy - schemeRadius);
+            int right = (int) (cx + schemeRadius);
+            int bottom = (int) (cy + schemeRadius);
+            drawDrawable.setBounds(left, top, right, bottom);
+            drawDrawable.draw(canvas);
+        }
     }
 
     @Override

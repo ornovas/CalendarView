@@ -443,7 +443,7 @@ public class CalendarViewDelegate {
     /**
      * 月份资源文本id
      */
-    public int monthStringResId = R.array.week_string_array;
+    public int monthStringResId = R.array.month_string_array;
 
     /**
      * 预览的日期, 格式必须是yyyyMMdd.
