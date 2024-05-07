@@ -148,19 +148,15 @@ public class SingleActivity extends BaseActivity implements
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ll_flyme:
-                MeiZuActivity.show(this);
-                break;
-            case R.id.ll_simple:
-                SimpleActivity.show(this);
-                break;
-            case R.id.ll_colorful:
-                SingleActivity.show(this);
-                break;
-            case R.id.ll_index:
-                IndexActivity.show(this);
-                break;
+        int id = v.getId();
+        if (id == R.id.ll_flyme) {
+            MeiZuActivity.show(this);
+        } else if (id == R.id.ll_simple) {
+            SimpleActivity.show(this);
+        } else if (id == R.id.ll_colorful) {
+            SingleActivity.show(this);
+        } else if (id == R.id.ll_index) {
+            IndexActivity.show(this);
         }
     }
 

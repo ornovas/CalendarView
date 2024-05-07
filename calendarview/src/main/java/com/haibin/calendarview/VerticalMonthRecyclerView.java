@@ -2,6 +2,7 @@ package com.haibin.calendarview;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,7 +137,7 @@ public class VerticalMonthRecyclerView extends RecyclerView {
 
     public void setCurrentItem(final int position, final boolean smoothScroll) {
         LayoutManager layoutManager = getLayoutManager();
-        if (layoutManager == null) {
+        if (layoutManager == null || position < 0) {
             return;
         }
         if (smoothScroll) {

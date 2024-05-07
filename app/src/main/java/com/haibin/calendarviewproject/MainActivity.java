@@ -325,56 +325,40 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ll_flyme:
-                MeiZuActivity.show(this);
-                //CalendarActivity.show(this);
-                break;
-            case R.id.ll_custom:
-                CustomActivity.show(this);
-                break;
-            case R.id.ll_mix:
-                MixActivity.show(this);
-                break;
-            case R.id.ll_full:
-                FullActivity.show(this);
-                break;
-            case R.id.ll_range:
-                RangeActivity.show(this);
-                break;
-            case R.id.ll_colorful:
-                ColorfulActivity.show(this);
-                break;
-            case R.id.ll_index:
-                IndexActivity.show(this);
-                break;
-            case R.id.ll_tab:
-                ViewPagerActivity.show(this);
-                break;
-            case R.id.ll_single:
-                SingleActivity.show(this);
-                break;
-            case R.id.ll_multi:
-                MultiActivity.show(this);
-                break;
-            case R.id.ll_solar_system:
-                SolarActivity.show(this);
-                break;
-            case R.id.ll_progress:
-                ProgressActivity.show(this);
-                break;
-            case R.id.ll_simple:
-                SimpleActivity.show(this);
-                break;
-            case R.id.ll_vertical:
-                VerticalActivity.show(this);
-                break;
-            case R.id.ll_simple_mark:
-                SimpleMarkActivity.show(this);
-                break;
-            case R.id.ll_simple_mark2:
-                SimpleMarkActivity2.show(this);
-                break;
+        int id = v.getId();
+        if (id == R.id.ll_flyme) {
+            MeiZuActivity.show(this);
+            //CalendarActivity.show(this);
+        } else if (id == R.id.ll_custom) {
+            CustomActivity.show(this);
+        } else if (id == R.id.ll_mix) {
+            MixActivity.show(this);
+        } else if (id == R.id.ll_full) {
+            FullActivity.show(this);
+        } else if (id == R.id.ll_range) {
+            RangeActivity.show(this);
+        } else if (id == R.id.ll_colorful) {
+            ColorfulActivity.show(this);
+        } else if (id == R.id.ll_index) {
+            IndexActivity.show(this);
+        } else if (id == R.id.ll_tab) {
+            ViewPagerActivity.show(this);
+        } else if (id == R.id.ll_single) {
+            SingleActivity.show(this);
+        } else if (id == R.id.ll_multi) {
+            MultiActivity.show(this);
+        } else if (id == R.id.ll_solar_system) {
+            SolarActivity.show(this);
+        } else if (id == R.id.ll_progress) {
+            ProgressActivity.show(this);
+        } else if (id == R.id.ll_simple) {
+            SimpleActivity.show(this);
+        } else if (id == R.id.ll_vertical) {
+            VerticalActivity.show(this);
+        } else if (id == R.id.ll_simple_mark) {
+            SimpleMarkActivity.show(this);
+        } else if (id == R.id.ll_simple_mark2) {
+            SimpleMarkActivity2.show(this);
         }
     }
 

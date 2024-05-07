@@ -1,12 +1,15 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+}
 
 android {
-    compileSdkVersion 31
+    namespace "com.haibin.calendarview"
+    compileSdk 31
 
     defaultConfig {
-        minSdkVersion 14
+        minSdk 14
         //noinspection OldTargetApi
-        targetSdkVersion 31
+        targetSdk 31
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
