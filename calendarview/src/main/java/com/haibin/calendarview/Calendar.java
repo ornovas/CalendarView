@@ -94,6 +94,12 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
     private String scheme;
 
     /**
+     * obj 构建传递对象必须实现 Serializable
+     * The obj build pass object must implement Serializable
+     */
+    private Object obj;
+
+    /**
      * 各种自定义标记颜色、没有则选择默认颜色，如果使用多标记，请使用下面API
      * using addScheme(int schemeColor,String scheme); multi scheme
      */
@@ -191,6 +197,14 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
 
     public void setScheme(String scheme) {
         this.scheme = scheme;
+    }
+
+    public Object getObj() {
+        return obj;
+    }
+
+    public void setObj(Object obj) {
+        this.obj = obj;
     }
 
     public int getSchemeColor() {
@@ -315,6 +329,9 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
         if (!TextUtils.isEmpty(scheme)) {
             return true;
         }
+        if (obj != null) {
+            return true;
+        }
         return false;
     }
 
@@ -415,6 +432,7 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
                 defaultScheme : calendar.getScheme());
         setSchemeColor(calendar.getSchemeColor());
         setSchemes(calendar.getSchemes());
+        setObj(calendar.getObj());
     }
 
     final void clearScheme() {

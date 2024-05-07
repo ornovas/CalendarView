@@ -8,6 +8,8 @@ import android.text.TextUtils;
 
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.MonthView;
+import com.haibin.calendarviewproject.MainActivity;
+import com.haibin.calendarviewproject.bean.CurData;
 
 /**
  * 演示一个变态需求的月视图
@@ -116,15 +118,23 @@ public class CustomMonthView extends MonthView {
 
     @Override
     protected void onDrawScheme(Canvas canvas, Calendar calendar, int x, int y) {
-
-        boolean isSelected = isSelected(calendar);
-        if (isSelected) {
-            mPointPaint.setColor(Color.WHITE);
-        } else {
-            mPointPaint.setColor(Color.GRAY);
+        if (calendar.getObj() instanceof CurData) {
+            boolean isSelected = isSelected(calendar);
+            if (isSelected) {
+                mPointPaint.setColor(Color.WHITE);
+            } else {
+                mPointPaint.setColor(Color.GRAY);
+            }
+            CurData curData = (CurData) calendar.getObj();
+            int count = curData.getCount();
+            for (int i = 0; i < count; i++) {
+                float offset = (count - 1) / 2.0f; // 计算偏移量，使中间点位于中心
+                float pointX = x + mItemWidth / 2 + (i - offset) * (mPointRadius * 2 + mPadding);
+                float pointY = y + mItemHeight - 3 * mPadding;
+                canvas.drawCircle(pointX, pointY, mPointRadius, mPointPaint);
+            }
+//            canvas.drawCircle(x + mItemWidth / 2, y + mItemHeight - 3 * mPadding, mPointRadius, mPointPaint);
         }
-
-        canvas.drawCircle(x + mItemWidth / 2, y + mItemHeight - 3 * mPadding, mPointRadius, mPointPaint);
     }
 
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
@@ -139,9 +149,12 @@ public class CustomMonthView extends MonthView {
         }
 
         if (hasScheme) {
-            canvas.drawCircle(x + mItemWidth - mPadding - mCircleRadius / 2, y + mPadding + mCircleRadius, mCircleRadius, mSchemeBasicPaint);
-            mTextPaint.setColor(calendar.getSchemeColor());
-            canvas.drawText(calendar.getScheme(), x + mItemWidth - mPadding - mCircleRadius, y + mPadding + mSchemeBaseLine, mTextPaint);
+            if (calendar.getObj() instanceof CurData) {
+                CurData curData = (CurData) calendar.getObj();
+                canvas.drawCircle(x + mItemWidth - mPadding - mCircleRadius / 2, y + mPadding + mCircleRadius, mCircleRadius, mSchemeBasicPaint);
+                mTextPaint.setColor(calendar.getSchemeColor());
+                canvas.drawText(curData.getText() + "1", x + mItemWidth - mPadding - mCircleRadius, y + mPadding + mSchemeBaseLine, mTextPaint);
+            }
         }
 
         //当然可以换成其它对应的画笔就不麻烦，

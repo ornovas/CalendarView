@@ -17,6 +17,7 @@ import com.haibin.calendarview.CalendarLayout;
 import com.haibin.calendarview.CalendarView;
 import com.haibin.calendarview.TrunkBranchAnnals;
 import com.haibin.calendarviewproject.base.activity.BaseActivity;
+import com.haibin.calendarviewproject.bean.CurData;
 import com.haibin.calendarviewproject.colorful.ColorfulActivity;
 import com.haibin.calendarviewproject.custom.CustomActivity;
 import com.haibin.calendarviewproject.full.FullActivity;
@@ -35,6 +36,7 @@ import com.haibin.calendarviewproject.simple.SimpleActivity;
 import com.haibin.calendarviewproject.single.SingleActivity;
 import com.haibin.calendarviewproject.solay.SolarActivity;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -369,6 +371,7 @@ public class MainActivity extends BaseActivity implements
         calendar.setDay(day);
         calendar.setSchemeColor(color);//如果单独标记颜色、则会使用这个颜色
         calendar.setScheme(text);
+        calendar.setObj(new CurData(text, ((int) (Math.random() * 3)) + 1));
         return calendar;
     }
 
