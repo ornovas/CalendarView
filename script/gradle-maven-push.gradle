@@ -17,6 +17,8 @@
  */
 //apply plugin: 'maven-publish'
 
+group = "com.haibin.calendarview"
+
 afterEvaluate {
     publishing {
         def versionName = "3.7.1.43" // 当前版本依赖库版本号，这个jitpack不会使用到，只是我们开发者自己查看
@@ -25,6 +27,7 @@ afterEvaluate {
             release(MavenPublication) {
                 // Applies the component for the release build variant.
 //                from components.release // 表示发布 release（jitpack 都不会使用到）
+//                from components.java
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'com.haibin.calendarview' // 这个是依赖库的组 id
                 artifactId = 'calendarview' // 依赖库的名称（jitpack 都不会使用到）

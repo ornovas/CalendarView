@@ -3,6 +3,8 @@ plugins {
     id 'maven-publish'
 }
 
+apply from: '../script/gradle-maven-push.gradle'
+
 android {
     namespace "com.haibin.calendarview"
     compileSdk 33
@@ -49,4 +51,3 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
     testDebugImplementation 'junit:junit:4.13.2'
 }
-apply from: '../script/gradle-maven-push.gradle'
