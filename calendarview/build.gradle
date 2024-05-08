@@ -3,7 +3,19 @@ plugins {
     id 'maven-publish'
 }
 
-apply from: '../script/gradle-maven-push.gradle'
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.ornovas' // 替换为您的 Group ID
+            artifactId = 'calendarview' // 替换为您的 Artifact ID
+            version = '3.7.1.43' // 替换为您的版本号
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+}
 
 android {
     namespace "com.haibin.calendarview"
