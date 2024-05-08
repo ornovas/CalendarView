@@ -16,9 +16,6 @@
  * limitations under the License.
  */
 //apply plugin: 'maven-publish'
-
-group = "com.haibin.calendarview"
-
 //afterEvaluate {
 //    publishing {
 //        def versionName = "3.7.1.43" // 当前版本依赖库版本号，这个jitpack不会使用到，只是我们开发者自己查看
@@ -47,16 +44,50 @@ group = "com.haibin.calendarview"
 //    }
 //}
 
-//publishing {
-//    publications {
-//        release(MavenPublication) {
-//            groupId = 'com.github.ornovas' // 替换为您的 Group ID
-//            artifactId = 'calendarview' // 替换为您的 Artifact ID
-//            version = '3.7.1.43' // 替换为您的版本号
-//
-//            afterEvaluate {
-//                from components.release
+//生成文档注释
+tasks.register('androidJavadocs', Javadoc) {
+    failOnError = false
+    source = android.sourceSets.main.java.srcDirs
+    ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+    classpath += files(ext.androidJar)
+}
+//将文档打包成jar
+tasks.register('androidJavadocsJar', Jar) {
+    dependsOn androidJavadocs
+    archiveClassifier.set('javadoc')
+    from androidJavadocs.destinationDir
+}
+//将源码打包，这一点对kotlin来说很重要，否则业务侧无法看到源码
+tasks.register('androidSourcesJar', Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+configurations.maybeCreate("default")
+def publishArtifact = artifacts.add("default", file('libs/oaid_sdk_1.0.30.aar'))
+
+afterEvaluate{
+    publishing {
+        publications {
+            myPublication(MavenPublication) {
+                groupId 'com.haibin.calendarview'
+                artifactId 'calendarview'
+                version '1.0.0'             // Your package version
+                artifact(androidSourcesJar)//将源码打包进aar，如果不需要可以去掉
+                artifact(androidJavadocsJar)//将注释打包进aar，如果不需要可以去掉
+                // 将aar推送到远程仓库
+                artifact publishArtifact    //Example: *./target/myJavaClasses.jar*
+            }
+        }
+
+        // Repositories *to* which Gradle can publish artifacts
+//        repositories {
+//            maven {
+//                url uri('../local_maverepo')
+//                credentials {
+//                    username "default"
+//                    password "default"
+//                }
 //            }
 //        }
-//    }
-//}
+    }
+}
