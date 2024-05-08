@@ -26,7 +26,7 @@ afterEvaluate {
                 // Applies the component for the release build variant.
 
                 // You can then customize attributes of the publication as shown below.
-                groupId = 'com.github.ornovas' // 这个是依赖库的组 id
+                groupId = 'com.haibin.calendarview' // 这个是依赖库的组 id
                 artifactId = 'CalendarView' // 依赖库的名称（jitpack 都不会使用到）
                 version = versionName
 //                from components.release // 表示发布 release（jitpack 都不会使用到）
