@@ -12,6 +12,7 @@ android {
     defaultConfig {
         minSdk 14
         //noinspection OldTargetApi
+        versionName "1.0.0"
         targetSdk 33
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -33,7 +34,7 @@ android {
     }
     libraryVariants.configureEach { variant ->
         variant.outputs.configureEach {
-            outputFileName = "${project.name}.aar"
+            outputFileName = "${project.name}/1.0.0.aar"
         }
     }
 //    task intoJar(type: Copy) {
