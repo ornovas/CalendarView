@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace "com.haibin.calendarviewproject"
-    compileSdk 31
+    compileSdk 33
 
     //noinspection GradleDependency
     defaultConfig {
         applicationId "com.haibin.calendarviewproject"
         minSdk 15
         //noinspection OldTargetApi
-        targetSdk 31
+        targetSdk 33
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
