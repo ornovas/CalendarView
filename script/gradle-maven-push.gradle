@@ -104,84 +104,80 @@ javadoc {
     }
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
+publishing {
+    publications {
+        release(MavenPublication) {
 //                try {
 //                    from components.release
 //                } catch (e) {
 //                    e.printStackTrace()
 //                }
-                groupId pomLibGroupName
-                artifactId pomLibArtifactId
-                version pomLibVersion             // Your package version
-                description pomLibDescription
+            groupId pomLibGroupName
+            artifactId pomLibArtifactId
+            version pomLibVersion             // Your package version
+            description pomLibDescription
 
-                artifact(androidSourcesJar)//将源码打包进aar，如果不需要可以去掉
-                artifact(androidJavadocsJar)//将注释打包进aar，如果不需要可以去掉
-                artifact "${buildDir}/outputs/aar/${project.name}.aar"
-                // 将aar推送到远程仓库
-//                artifact publishArtifact    //Example: *./target/myJavaClasses.jar*
-
-                //带上依赖 ，否则会报错
-                pom.withXml {
-                    def root = asNode()
-                    root.appendNode('name', pomLibArtifactId)
-                    root.appendNode('description', pomLibDescription)
-                    root.appendNode('url', pomSiteUrl)
-                    root.appendNode('licenses').appendNode('license').appendNode('name', pomLicenses[0])
-                    def developer = root.appendNode('developers').appendNode('developer')
-                    developer.appendNode('id', pomDeveloperId)
-                    developer.appendNode('name', pomDeveloperName)
-                    developer.appendNode('email', pomDeveloperEmail)
-                    // Define this explicitly if using implementation or api configurations
-                    def dependenciesNode = root['dependencies'][0] ?: root.appendNode('dependencies')
-                    def addDependency = {
-                        // Ensure dependencies such as fileTree are not included.
-                        if (it.group && it.name && it.version) {
-                            def dependencyNode = dependenciesNode.appendNode('dependency')
-                            dependencyNode.appendNode('groupId', it.group)
-                            dependencyNode.appendNode('artifactId', it.name)
-                            if (it.group == pomLibGroupName && it.version == 'unspecified') {
-                                dependencyNode.appendNode('version', pomLibVersion)
-                            } else {
-                                dependencyNode.appendNode('version', it.version)
-                            }
-                            if (it.hasProperty('optional') && it.optional) {
-                                dependencyNode.appendNode('optional', 'true')
-                            }
+            artifact androidSourcesJar//将源码打包进aar，如果不需要可以去掉
+            artifact androidJavadocsJar//将注释打包进aar，如果不需要可以去掉
+            // 将aar推送到远程仓库,必须有这个 否则不会上传AAR包
+            afterEvaluate { artifact(tasks.named("bundleReleaseAar")) }
+            //带上依赖 ，否则会报错
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('name', pomLibArtifactId)
+                root.appendNode('description', pomLibDescription)
+                root.appendNode('url', pomSiteUrl)
+                root.appendNode('licenses').appendNode('license').appendNode('name', pomLicenses[0])
+                def developer = root.appendNode('developers').appendNode('developer')
+                developer.appendNode('id', pomDeveloperId)
+                developer.appendNode('name', pomDeveloperName)
+                developer.appendNode('email', pomDeveloperEmail)
+                // Define this explicitly if using implementation or api configurations
+                def dependenciesNode = root['dependencies'][0] ?: root.appendNode('dependencies')
+                def addDependency = {
+                    // Ensure dependencies such as fileTree are not included.
+                    if (it.group && it.name && it.version) {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        if (it.group == pomLibGroupName && it.version == 'unspecified') {
+                            dependencyNode.appendNode('version', pomLibVersion)
+                        } else {
+                            dependencyNode.appendNode('version', it.version)
+                        }
+                        if (it.hasProperty('optional') && it.optional) {
+                            dependencyNode.appendNode('optional', 'true')
                         }
                     }
-                    // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
-                    configurations.implementation.allDependencies.each addDependency
-                    configurations.api.allDependencies.each addDependency
                 }
+                // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.implementation.allDependencies.each addDependency
+                configurations.api.allDependencies.each addDependency
             }
         }
+    }
 
-        repositories {
-            // 下面这部分，不是很清楚加不加，但是最后加上
-            maven {
-                // change URLs to point to your repos, e.g. http://my.org/repo
-                def baseUrl = buildDir.getParent()
-                def releasesRepoUrl = "$baseUrl/repos/releases"
-                def snapshotsRepoUrl = "$baseUrl/repos/snapshots"
-                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-            }
+    repositories {
+        // 下面这部分，不是很清楚加不加，但是最后加上
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+            def baseUrl = buildDir.getParent()
+            def releasesRepoUrl = "$baseUrl/repos/releases"
+            def snapshotsRepoUrl = "$baseUrl/repos/snapshots"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
         }
+    }
 
-        // Repositories *to* which Gradle can publish artifacts
-//        repositories {
-//            maven {
-//                url uri('../local_maverepo')
-//                credentials {
-//                    username "default"
-//                    password "default"
-//                }
+//    Repositories *to* which Gradle can publish artifacts
+//    repositories {
+//        maven {
+//            url uri('../local_maverepo')
+//            credentials {
+//                username "default"
+//                password "default"
 //            }
 //        }
-    }
+//    }
 }
 
 static def getGitLatestTag() {
