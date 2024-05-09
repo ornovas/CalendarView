@@ -46,10 +46,18 @@
 
 apply plugin: 'maven-publish'
 
+//项目相关信息
 def pomLibGroupName = 'com.haibin.calendarview'
 def pomLibArtifactId = project.name
 def pomLibVersion = getGitLatestTag()
 def pomLibDescription = "TODO description: ${rootProject.name} for Android"
+def pomSiteUrl = "https://gitee.com/li_yu_jiang/${rootProject.name}"
+def pomLicenses = ["Apache License 2.0", "Mulan PSL v2"]
+
+//开发者信息
+def pomDeveloperId = 'liyujiang-gzu'
+def pomDeveloperName = '李玉江'
+def pomDeveloperEmail = '1032694760@qq.com'
 
 //生成文档注释
 tasks.register('androidJavadocs', Javadoc) {
@@ -77,11 +85,11 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-//                try {
-//                    from components.release
-//                } catch (e) {
-//                    e.printStackTrace()
-//                }
+                try {
+                    from components.release
+                } catch (e) {
+                    e.printStackTrace()
+                }
                 groupId pomLibGroupName
                 artifactId pomLibArtifactId
                 version pomLibVersion             // Your package version
@@ -147,9 +155,9 @@ afterEvaluate {
                     root.appendNode('url', pomSiteUrl)
                     root.appendNode('licenses').appendNode('license').appendNode('name', pomLicenses[0])
                     def developer = root.appendNode('developers').appendNode('developer')
-                    developer.appendNode('id', pomDeveloperId)
-                    developer.appendNode('name', pomDeveloperName)
-                    developer.appendNode('email', pomDeveloperEmail)
+//                    developer.appendNode('id', pomDeveloperId)
+//                    developer.appendNode('name', pomDeveloperName)
+//                    developer.appendNode('email', pomDeveloperEmail)
                     // Define this explicitly if using implementation or api configurations
                     def dependenciesNode = root['dependencies'][0] ?: root.appendNode('dependencies')
                     def addDependency = {
