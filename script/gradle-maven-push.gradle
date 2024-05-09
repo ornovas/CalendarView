@@ -108,11 +108,11 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                try {
-                    from components.release
-                } catch (e) {
-                    e.printStackTrace()
-                }
+//                try {
+//                    from components.release
+//                } catch (e) {
+//                    e.printStackTrace()
+//                }
                 groupId pomLibGroupName
                 artifactId pomLibArtifactId
                 version pomLibVersion             // Your package version
@@ -120,10 +120,7 @@ afterEvaluate {
 
                 artifact(androidSourcesJar)//将源码打包进aar，如果不需要可以去掉
                 artifact(androidJavadocsJar)//将注释打包进aar，如果不需要可以去掉
-
-                artifact "${buildDir}/intermediates/aar_main_jar/release/classes.jar"
-
-//                artifact "${buildDir}/outputs/aar/${project.name}.aar"
+                artifact "${buildDir}/outputs/aar/${project.name}.aar"
                 // 将aar推送到远程仓库
 //                artifact publishArtifact    //Example: *./target/myJavaClasses.jar*
 
