@@ -34,7 +34,7 @@ android {
     }
     libraryVariants.configureEach { variant ->
         variant.outputs.configureEach {
-            outputFileName = "${project.name}/1.0.0.aar"
+            outputFileName = "${project.name}.aar"
         }
     }
 //    task intoJar(type: Copy) {
