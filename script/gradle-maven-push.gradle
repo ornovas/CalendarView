@@ -44,6 +44,8 @@
 //    }
 //}
 
+apply plugin: 'maven-publish'
+
 //生成文档注释
 tasks.register('androidJavadocs', Javadoc) {
     failOnError = false
@@ -62,8 +64,9 @@ tasks.register('androidSourcesJar', Jar) {
     archiveClassifier.set('sources')
     from android.sourceSets.main.java.srcDirs
 }
-configurations.maybeCreate("default")
-def publishArtifact = artifacts.add("default", file('libs/oaid_sdk_1.0.30.aar'))
+// 打包本地引入的aar
+//configurations.maybeCreate("default")
+//def publishArtifact = artifacts.add("default", file('libs/oaid_sdk_1.0.30.aar'))
 
 afterEvaluate{
     publishing {
