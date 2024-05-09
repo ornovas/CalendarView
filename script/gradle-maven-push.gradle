@@ -77,11 +77,11 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                try {
-                    from components.release
-                } catch (e) {
-                    e.printStackTrace()
-                }
+//                try {
+//                    from components.release
+//                } catch (e) {
+//                    e.printStackTrace()
+//                }
                 groupId pomLibGroupName
                 artifactId pomLibArtifactId
                 version pomLibVersion             // Your package version
