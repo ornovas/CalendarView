@@ -46,6 +46,11 @@
 
 apply plugin: 'maven-publish'
 
+def pomLibGroupName = 'com.haibin.calendarview'
+def pomLibArtifactId = project.name
+def pomLibVersion = getGitLatestTag()
+def pomLibDescription = "TODO description: ${rootProject.name} for Android"
+
 //生成文档注释
 tasks.register('androidJavadocs', Javadoc) {
     failOnError = false
@@ -77,9 +82,11 @@ afterEvaluate {
                 } catch (e) {
                     e.printStackTrace()
                 }
-                groupId 'com.haibin.calendarview'
-                artifactId 'calendarview'
-                version '3.7.1.42'             // Your package version
+                groupId pomLibGroupName
+                artifactId pomLibArtifactId
+                version pomLibVersion             // Your package version
+                description pomLibDescription
+
                 artifact(androidSourcesJar)//将源码打包进aar，如果不需要可以去掉
                 artifact(androidJavadocsJar)//将注释打包进aar，如果不需要可以去掉
                 artifact "${buildDir}/outputs/aar/calendarview.aar"
@@ -156,5 +163,15 @@ afterEvaluate {
 //                }
 //            }
 //        }
+    }
+}
+
+static def getGitLatestTag() {
+    try {
+        // See https://www.jianshu.com/p/2ecfd791c464
+        def cmd = 'git describe --tags --always'
+        return cmd.execute().text.trim() ?: '0.1.0'
+    } catch (ignored) {
+        return "0.0.0"
     }
 }
