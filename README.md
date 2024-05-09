@@ -1,7 +1,7 @@
 
 # CalenderView
 
-基于[CalenderView](implementation 'com.github.angcyo:CalendarView:3.7.1.37')`3.7.1.37`的版本修改, 实现了如下功能:
+基于[CalenderView](https://github.com/angcyo/CalendarView)`3.7.1.37`的版本修改, 实现了如下功能:
 
 - `升级AGP8.0`
 
