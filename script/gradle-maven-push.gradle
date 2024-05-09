@@ -79,7 +79,7 @@ afterEvaluate {
                 }
                 groupId 'com.haibin.calendarview'
                 artifactId 'calendarview'
-                version '1.0.0'             // Your package version
+                version '3.7.1.42'             // Your package version
                 artifact(androidSourcesJar)//将源码打包进aar，如果不需要可以去掉
                 artifact(androidJavadocsJar)//将注释打包进aar，如果不需要可以去掉
                 artifact "${buildDir}/outputs/aar/calendarview.aar"
