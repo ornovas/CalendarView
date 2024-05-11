@@ -107,18 +107,17 @@ javadoc {
 publishing {
     publications {
         release(MavenPublication) {
-//                try {
-//                    from components.release
-//                } catch (e) {
-//                    e.printStackTrace()
-//                }
+            try {
+                from components.release
+            } catch (e) {
+                e.printStackTrace()
+            }
             groupId pomLibGroupName
             artifactId pomLibArtifactId
             version pomLibVersion             // Your package version
             description pomLibDescription
-
-            artifact androidSourcesJar//将源码打包进aar，如果不需要可以去掉
-            artifact androidJavadocsJar//将注释打包进aar，如果不需要可以去掉
+//            artifact androidSourcesJar//将源码打包进aar，如果不需要可以去掉
+//            artifact androidJavadocsJar//将注释打包进aar，如果不需要可以去掉
             // 将aar推送到远程仓库,必须有这个 否则不会上传AAR包
             afterEvaluate { artifact(tasks.named("bundleReleaseAar")) }
             //带上依赖 ，否则会报错
